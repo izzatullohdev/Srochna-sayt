@@ -77,7 +77,6 @@ const About = () => {
     }
   };
 
-
   return (
     <>
       <motion.section 

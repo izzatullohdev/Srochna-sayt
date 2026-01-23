@@ -122,7 +122,7 @@ const Price = () => {
                 transition={{ 
                   duration: 4,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: [0.25, 0.1, 0.25, 1] as const
                 }}
               />
               <motion.div 
@@ -134,7 +134,7 @@ const Price = () => {
                 transition={{ 
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: [0.25, 0.1, 0.25, 1] as const,
                   delay: 0.5
                 }}
               />
@@ -147,7 +147,7 @@ const Price = () => {
                 transition={{ 
                   duration: 3.5,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: [0.25, 0.1, 0.25, 1] as const,
                   delay: 1
                 }}
               />
