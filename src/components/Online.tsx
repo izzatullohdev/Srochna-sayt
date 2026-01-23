@@ -51,7 +51,7 @@ const Online = () => {
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as const }
     }
   };
 
@@ -61,7 +61,7 @@ const Online = () => {
       opacity: 1, 
       x: 0,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] as const }
     }
   };
 
