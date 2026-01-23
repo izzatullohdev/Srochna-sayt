@@ -1,0 +1,257 @@
+.students-section {
+  width: 100%;
+  padding: 4rem 2rem;
+  background: #f5f0e8;
+}
+
+.students-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.students-header {
+  margin-bottom: 2rem;
+}
+
+.students-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.students-description {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+}
+
+.students-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.students-swiper {
+  width: 100%;
+  padding: 1rem 0 3rem 0;
+}
+
+.testimonial-card {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-top: 125%; /* 4:5 aspect ratio */
+  overflow: hidden;
+  background: #ddd;
+}
+
+.thumbnail-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-button-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.testimonial-card:hover .play-button-overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover .play-button {
+  transform: scale(1.1);
+}
+
+.play-button svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
+  padding: 1.5rem 1rem 1rem 1rem;
+  color: white;
+}
+
+.card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+  font-style: italic;
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+}
+
+.card-specialization {
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, sans-serif;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* Swiper Navigation */
+.students-swiper :global(.swiper-button-next),
+.students-swiper :global(.swiper-button-prev) {
+  display: none !important;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e3a8a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  top: 50%;
+  margin-top: -25px;
+}
+
+.students-swiper :global(.swiper-button-next) {
+  right: 10px;
+}
+
+.students-swiper :global(.swiper-button-prev) {
+  left: 10px;
+}
+
+.students-swiper :global(.swiper-button-next::after),
+.students-swiper :global(.swiper-button-prev::after) {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.students-swiper :global(.swiper-button-next:hover),
+.students-swiper :global(.swiper-button-prev:hover) {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.students-swiper :global(.swiper-button-disabled) {
+  opacity: 0.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1280px) {
+  .students-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .students-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .students-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .students-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .students-title {
+    font-size: 2rem;
+  }
+
+  .students-description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .students-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .students-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .students-title {
+    font-size: 1.75rem;
+  }
+
+  .students-description {
+    font-size: 0.95rem;
+  }
+
+  .card-name {
+    font-size: 1rem;
+  }
+
+  .card-specialization {
+    font-size: 0.8rem;
+  }
+
+  .students-swiper :global(.swiper-button-next),
+  .students-swiper :global(.swiper-button-prev) {
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+  }
+
+  .students-swiper :global(.swiper-button-next::after),
+  .students-swiper :global(.swiper-button-prev::after) {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .students-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .students-title {
+    font-size: 1.5rem;
+  }
+
+  .students-description {
+    font-size: 0.9rem;
+  }
+
+  .card-overlay {
+    padding: 1rem 0.75rem 0.75rem 0.75rem;
+  }
+}
