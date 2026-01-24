@@ -1,7 +1,20 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiX } from 'react-icons/hi';
 import './Certificate.css';
+import pdfImage from '../assets/pdf.png';
+import unicumPdf from '../assets/Unicum.pdf';
 
 const Certificate = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -23,6 +36,7 @@ const Certificate = () => {
 
   return (
     <motion.section 
+      id="certificate"
       className="certificate-section"
       initial="hidden"
       whileInView="visible"
@@ -34,7 +48,8 @@ const Certificate = () => {
           className="certificate-main-title"
           variants={itemVariants}
         >
-          So'zda emas, hujjatda: O'zDJTU rektorining rasmiy kafolati
+          <span style={{ color: '#ff8c00' }}>So'zda emas</span>, hujjatda:<br />
+          O'zDJTU rektorining rasmiy kafolati
         </motion.h2>
         
         <div className="certificate-content">
@@ -44,10 +59,14 @@ const Certificate = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="certificate-frame">
-              <motion.img 
-                src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&h=1000&fit=crop" 
-                alt="IELTS Certificate" 
+            <div 
+              className="certificate-frame"
+              onClick={openModal}
+              style={{ cursor: 'pointer' }}
+            >
+              <motion.img
+                src={pdfImage}
+                alt="Unicum Foundation Certificate"
                 className="certificate-image"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -101,6 +120,43 @@ const Certificate = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* PDF Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            className="certificate-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeModal}
+          >
+            <motion.div 
+              className="certificate-modal"
+              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="certificate-modal-close-button"
+                onClick={closeModal}
+                aria-label="Close modal"
+              >
+                <HiX className="close-icon" />
+              </button>
+              
+              <iframe
+                src={unicumPdf}
+                className="certificate-pdf-viewer"
+                title="Unicum Foundation Certificate PDF"
+                type="application/pdf"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.section>
   );
 };

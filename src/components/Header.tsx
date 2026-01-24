@@ -97,6 +97,9 @@ const Header = () => {
               <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')}>Biz haqimizda</a>
             </li>
             <li className="nav-item">
+              <a href="#certificate" onClick={(e) => handleSmoothScroll(e, 'certificate')}>Kafolat</a>
+            </li>
+            <li className="nav-item">
               <a href="#reviews" onClick={(e) => handleSmoothScroll(e, 'reviews')}>Talabalar fikri</a>
             </li>
             <li className="nav-item">
@@ -138,14 +141,6 @@ const Header = () => {
           >
             UNICUM FOUNDATION
           </motion.h1>
-          <motion.h2 
-            className="hero-subtitle"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-          >
-            INGLIZ TILI VA IELTS
-          </motion.h2>
           <motion.p 
             className="hero-description"
             initial={{ y: 30, opacity: 0 }}

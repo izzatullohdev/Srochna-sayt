@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiX } from 'react-icons/hi';
+import { HiX, HiFire } from 'react-icons/hi';
 import './Price.css';
 
 const Price = () => {
@@ -129,12 +129,17 @@ const Price = () => {
                     "O'quv materiallari: Barcha kitoblar, qo'llanmalar va audio-video materiallar bepul beriladi.",
                     "Doimiy nazorat: Ota-onalar uchun o'zlashtirish ko'rsatkichlari bo'yicha hisobotlar.",
                     "Yakuniy imtihon va sertifikat: O'zDJTU hamkor dasturlariga imtiyozli kirish huquqini beruvchi hujjat."
-                  ].map((text, index) => (
-                    <motion.li key={index} variants={itemVariants}>
-                      <span className="feature-icon">✓</span>
-                      {text}
-                    </motion.li>
-                  ))}
+                  ].map((text, index) => {
+                    const parts = text.split(':');
+                    const label = parts[0];
+                    const description = parts.slice(1).join(':');
+                    return (
+                      <motion.li key={index} variants={itemVariants}>
+                        <span className="feature-icon">✓</span>
+                        <strong>{label}:</strong>{description}
+                      </motion.li>
+                    );
+                  })}
                 </motion.ul>
               </motion.div>
             </motion.div>
@@ -201,9 +206,6 @@ const Price = () => {
                 whileHover={{ scale: 1.05, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="price-card-header">
-                  <h3 className="price-card-title">{plan.title}</h3>
-                </div>
                 <div className="price-card-body">
                   <div className="price-amount">
                     <span className="price-value">{plan.price}</span>
@@ -213,7 +215,9 @@ const Price = () => {
                   <ul className="price-card-features">
                     {plan.features.map((feature, index) => (
                       <li key={index}>
-                        <span className="feature-bullet">⚡</span>
+                        <span className="feature-bullet">
+                          <HiFire />
+                        </span>
                         {feature}
                       </li>
                     ))}

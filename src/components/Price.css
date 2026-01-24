@@ -64,10 +64,16 @@
 .price-features-list li {
   display: flex;
   align-items: flex-start;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   font-size: 1rem;
   color: #444;
   line-height: 1.5;
+}
+
+.price-features-list li strong {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .price-features-list .feature-icon {
@@ -140,7 +146,7 @@
 }
 
 .price-card {
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background: #ff8c00;
   border-radius: 20px;
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
@@ -151,16 +157,6 @@
   overflow: hidden;
 }
 
-.price-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-  pointer-events: none;
-}
 
 .price-card-header {
   position: relative;
@@ -232,6 +228,15 @@
   font-size: 1rem;
   flex-shrink: 0;
   margin-top: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.feature-bullet svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .price-card-footer {

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/swiper-bundle.css';
+import { Scrollbar, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
 import './Online.css';
 
 const Online = () => {
@@ -127,10 +128,12 @@ const Online = () => {
               <h4 className="slider-online">ONLINE</h4>
             </div>
             <Swiper
-              modules={[Pagination, Autoplay]}
+              modules={[Scrollbar, Autoplay]}
               spaceBetween={0}
               slidesPerView={1}
-              pagination={{ clickable: true }}
+              scrollbar={{
+                hide: true,
+              }}
               autoplay={{
                 delay: 3000,
                 disableOnInteraction: false,

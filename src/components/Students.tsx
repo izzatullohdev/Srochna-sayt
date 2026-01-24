@@ -78,15 +78,6 @@ const Students = () => {
           >
             Talabalar fikri
           </motion.h2>
-          <motion.p 
-            className="students-description"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Bu yerga talabalardan "Otziv" olib, videoni YouTube'ga va havolasini saytga joylimiz.
-          </motion.p>
         </motion.div>
         <motion.div 
           className="students-slider-wrapper"
