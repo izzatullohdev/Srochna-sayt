@@ -34,17 +34,19 @@ const Price = () => {
     {
       id: 1,
       title: 'Individual English',
-      price: '3 450 000',
+      price: '7 200 000',
       currency: 'UZS',
-      description: "Aynan siz uchun individual va maxsus dastur tuziladi",
+      description: "To'lovni birdaniga yoki bo'lib to'lash orqali amalga oshiring:",
       features: [
-        '12 ta dars',
-        "Ustoz bilan 1 ga 1 mashg'ulotlar",
-        "Student's Book va Grammar book",
-        "Universitetlar imtihonidan ozod qiluvchi sertifikat",
-        "Sunday Events va Speaking mashgulotlari"
+        "Qulay bo'lib to'lash: 3 oyga: oyiga 2 400 000 so'mdan, 6 oyga: oyiga 1 200 000 so'mdan",
+        "Narxga nimalar kiradi?",
+        "Ingliz tili (B1+ daraja)",
+        "AI va Soft Skills darslari",
+        "Barcha o'quv qo'llanmalar",
+        "Mock exams (Sinov imtihonlari)",
+        "O'zDJTU qo'shma dasturiga yo'llanma (Sertifikat)"
       ],
-      buttonText: "Individual o'qish"
+      buttonText: "Kursga yozilish"
     }
   ];
 
@@ -103,7 +105,7 @@ const Price = () => {
                 className="price-title"
                 variants={itemVariants}
               >
-                YANGI DARAJADAGI MASOFAVIY TA'LIM!
+                Oliy ta'limga kafolatlangan investitsiya
               </motion.h2>
               <motion.div 
                 className="price-description"
@@ -113,18 +115,20 @@ const Price = () => {
                   className="price-intro"
                   variants={itemVariants}
                 >
-                  Siz uchun yangi imkoniyat! Endilikda ingliz tilini o'rganishga masofa, vaqt, sharoit yoki pul muammo emas!
+                  Biz shunchaki ingliz tilini o'rgatmaymiz, biz abituriyentni talaba bo'lishga tayyorlaymiz. To'lov summasiga nafaqat muvaffaqiyatli o'qish uchun barcha zaruriy narsalar, balki zamonaviy dunyo talablariga to'liq javob beradigan ko'nikmalar ham kiritilgan:
                 </motion.p>
                 <motion.ul 
                   className="price-features-list"
                   variants={containerVariants}
                 >
                   {[
-                    "Birgina smartfon yoki kompyuter bilan istalgan joydan ingliz tilini o'rganing",
-                    "Ustozlarimiz CELTA va IELTS 9.0 sertifikatiga ega malakali mutaxassislar",
-                    "Student App orqali qulay va to'liq nazoratdagi darslar",
-                    "Online ta'lim formati offlayn ta'lim sifati darajasida",
-                    "Qat'iy nazorat va barqaror qo'llab-quvvatlash"
+                    "To'liq o'quv kursi: 0 dan B1 darajasigacha bo'lgan intensiv dastur.",
+                    "AI savodxonligi: O'qish va ishda sun'iy intellekt (ChatGPT, Google Gemini va h.k.) dan samarali foydalanishni o'rgatamiz.",
+                    "21-asr ko'nikmalari: Tanqidiy fikrlash, muammo yechish va liderlik qobiliyatlarini shakllantirish.",
+                    "Professional ustozlar: Yuqori darajaga ega va abituriyentlar bilan ishlash tajribasiga ega mutaxassislar.",
+                    "O'quv materiallari: Barcha kitoblar, qo'llanmalar va audio-video materiallar bepul beriladi.",
+                    "Doimiy nazorat: Ota-onalar uchun o'zlashtirish ko'rsatkichlari bo'yicha hisobotlar.",
+                    "Yakuniy imtihon va sertifikat: O'zDJTU hamkor dasturlariga imtiyozli kirish huquqini beruvchi hujjat."
                   ].map((text, index) => (
                     <motion.li key={index} variants={itemVariants}>
                       <span className="feature-icon">✓</span>

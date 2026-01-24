@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { HiPlus, HiMinus } from 'react-icons/hi';
 import './FAQ.css';
 
 const FAQ = () => {
@@ -8,28 +9,48 @@ const FAQ = () => {
   const faqItems = [
     {
       id: 1,
-      question: "Individual darslar va guruhli darslar qaysi vaqtlarda bo'ladi?",
-      answer: "Individual darslar va guruhli darslar hafta davomida turli vaqtlarda tashkil etiladi. Individual darslar sizning qulay vaqtingizga moslashtiriladi, guruhli darslar esa haftada 3 marta, 2 soatdan o'tkaziladi. Batafsil ma'lumot uchun biz bilan bog'laning."
+      question: "Siz beradigan sertifikat bilan qaysi universitetlarga imtihonsiz kirish mumkin?",
+      answer: "Ushbu sertifikat bilan O'zDJTUning Xitoy Xalq Respublikasi, Rossiya Federatsiyasi hamda Belarus Respublikasi oliy ta'lim muassasalari bilan tashkil etgan qo'shma ta'lim dasturlariga imtiyozli asosda kirishingiz mumkin."
     },
     {
       id: 2,
-      question: "Qaysi filialda eng yaxshi ustoz bor?",
-      answer: "INTER NATION SCHOOL'ning barcha filiallarida CELTA va IELTS 9.0 sertifikatiga ega malakali o'qituvchilar ishlaydi. Har bir filialda yuqori malakali mutaxassislar mavjud. Sizga eng qulay filialni tanlash imkoniyatini beramiz."
+      question: "O'qishga kirishga 100% kafolat berasizlarmi?",
+      answer: "Kafolat shundan iboratki, CEFR B1 darajasidagi ingliz tili sertifikatiga ega bo'lgan 400 nafar o'quvchilarimiz to'g'ridan-to'g'ri talabalikka qabul qilinadi."
     },
     {
       id: 3,
-      question: "Yoshga oid chegaralar mavjudmi?",
-      answer: "Ha, bizning kurslarimiz turli yosh guruhlari uchun mo'ljallangan. 7 yoshdan boshlab bolalar, o'smirlar va kattalar uchun alohida dasturlar mavjud. Har bir yosh guruhi uchun maxsus o'quv materiallari va metodikalar ishlatiladi."
+      question: "Ingliz tilini umuman bilmayman. Dasturda qatnasha olamanmi?",
+      answer: "Yo'q, dastur ingliz tili bo'yicha boshlang'ich va asosiy bilimlarga ega bo'lgan o'quvchilarga mo'ljallangan."
     },
     {
       id: 4,
-      question: "O'zim xohlagan darajada o'qishni boshlashim uchun nima qilishim kerak?",
-      answer: "O'zingiz xohlagan darajada o'qishni boshlash uchun avval bepul daraja aniqlash testidan o'tishingiz kerak. Test natijasiga ko'ra sizga mos daraja va dastur tavsiya etiladi. Testdan o'tish uchun biz bilan bog'laning yoki onlayn ariza qoldiring."
+      question: "Darslar onlayn bo'ladimi yoki oflayn?",
+      answer: "Ta'lim to'liq masofaviy (onlayn) shaklda bo'lib, siz smartfon yoki kompyuter orqali o'zingizga qulay joyda o'qishingiz mumkin."
     },
     {
       id: 5,
-      question: "INTER NATION SCHOOL'da o'qishni boshlasam, kitob va daftar sotib olishim kerakmi?",
-      answer: "Yo'q, sizga qo'shimcha kitob va daftar sotib olish shart emas. Bizning barcha o'quv materiallari (Student's Book, Grammar Book va boshqalar) kurs narxiga kiritilgan. Siz faqat darslarga qatnashishingiz kifoya."
+      question: "Kurs narxini bo'lib to'lasam bo'ladimi?",
+      answer: "Ha, to'lovni to'liq (100%) amalga oshirish yoki summani 3 ga va 6 ga bo'lib to'lash imkoniyatlari mavjud."
+    },
+    {
+      id: 6,
+      question: "Darslardan tashqari AI (Sun'iy intellekt)ni o'rganish majburiymi?",
+      answer: "Bu majburiyat emas, balki imkoniyatdir. Dastur davomida sizga o'qish va kelajakdagi ish jarayonlarida kerak bo'ladigan Sun'iy intellekt vositalari bilan ishlash ko'nikmalari o'rgatiladi."
+    },
+    {
+      id: 7,
+      question: "Agar kurs oxirida B1 darajasini ololmasam, nima bo'ladi?",
+      answer: "Kurs oxirida CEFR B1 sertifikatini olomasangiz, to'lagan pulingiz sizga 100% miqdorda qaytariladi."
+    },
+    {
+      id: 8,
+      question: "Darslarni kimlar o'tadi? O'qituvchilarning malakasi qanaqa?",
+      answer: "Darslarni xalqaro toifadagi sertifikatlarga ega bo'lgan yuqori malakali mutaxassislar olib boradilar."
+    },
+    {
+      id: 9,
+      question: "Bu dastur O'zDJTUning o'ziga kirishga yordam beradimi yoki faqat qo'shma dasturlargami?",
+      answer: "Ushbu dastur va imtiyozlar faqat O'zDJTUning xorijiy hamkorlar bilan tashkil etgan Qo'shma ta'lim dasturlariga qabul jarayoni uchun amal qiladi."
     }
   ];
 
@@ -151,7 +172,7 @@ const FAQ = () => {
                   animate={openIndex === index ? "open" : "closed"}
                   transition={{ duration: 0.3 }}
                 >
-                  {openIndex === index ? '−' : '+'}
+                  {openIndex === index ? <HiMinus /> : <HiPlus />}
                 </motion.span>
               </motion.div>
               <AnimatePresence>

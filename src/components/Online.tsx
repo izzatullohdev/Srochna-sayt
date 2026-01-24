@@ -87,36 +87,31 @@ const Online = () => {
               className="online-title"
               variants={itemVariants}
             >
-              YANGI DARAJADAGI MASOFAVIY TA'LIM!
+              Unicum Foundation: xalqaro diplomga ega bo'lish imkoniyati!
             </motion.h2>
             <motion.p 
               className="online-intro"
               variants={itemVariants}
             >
-              Masofa, vaqt, sharoit va mablag' muammosiz ingliz tilini o'rganish imkoniyati!
+              Biz ingliz tili shunchaki fan emas, balki katta kelajak kaliti ekanligiga ishonamiz. Unicum Foundation — bu o'z oldiga yuksak maqsad qo'ygan 11-sinf o'quvchilari uchun maxsus loyiha.
             </motion.p>
-            <motion.ul 
-              className="online-features"
-              variants={containerVariants}
+            <motion.p 
+              className="online-intro"
+              variants={itemVariants}
             >
-              {[
-                "Smartfon yoki kompyuter orqali istalgan joydan ingliz tilini o'rganing",
-                "O'qituvchilar - CELTA va IELTS 9.0 sertifikatiga ega malakali mutaxassislar",
-                "Qulay va to'liq nazorat qilinadigan darslar Student App orqali",
-                "Online ta'lim sifati offline ta'lim darajasida",
-                "Qat'iy nazorat va barqaror yordam"
-              ].map((text, index) => (
-                <motion.li key={index} variants={itemVariants}>
-                  <span className="feature-icon">✓</span>
-                  {text}
-                </motion.li>
-              ))}
-            </motion.ul>
+              Bizning vazifamiz aniq: sizni qisqa vaqt ichida CEFR B1 va undan yuqori darajaga olib chiqish. Ammo bu hali hammasi emas.
+            </motion.p>
+            <motion.p 
+              className="online-intro"
+              variants={itemVariants}
+            >
+              Dasturni muvaffaqiyatli tugatgan bitiruvchilarimizning 400 tasi maxsus sertifikatga ega bo'ladilar. Ushbu sertifikat sizga O'zbekiston davlat jahon tillari universiteti (O'zDJTU) ning Xitoy, Rossiya, Belarus va boshqa davlatlarning nufuzli universitetlari bilan tashkil etgan qo'shma ta'lim dasturlariga imtihonsiz imtiyoz asosida qabul qilinish imkonini beradi.
+            </motion.p>
             <motion.p 
               className="online-conclusion"
               variants={itemVariants}
             >
-              Ingliz tilini o'rganish imkoniyati endi hamma uchun ochiq! Bu - erkinlik, zamonaviy ta'lim va INTER NATION sifati.
+              Biz bilan talaba bo'lish imkoniyatingizni kafolatlang!
             </motion.p>
           </motion.div>
 

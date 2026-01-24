@@ -34,7 +34,7 @@ const Certificate = () => {
           className="certificate-main-title"
           variants={itemVariants}
         >
-          O'zbekiston davlat jahon tillari universitetining kafolat xati
+          So'zda emas, hujjatda: O'zDJTU rektorining rasmiy kafolati
         </motion.h2>
         
         <div className="certificate-content">
@@ -64,22 +64,27 @@ const Certificate = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
           >
-            <motion.h3 
+            <motion.p 
               className="certificate-text-title"
               variants={itemVariants}
             >
-              Siz uchun yangi imkoniyat! Endilikda ingliz tilini o'rganishga masofa, vaqt, sharoit yoki pul muammo emas!
-            </motion.h3>
+              Biz va'da bermaymiz, biz kafolatlaymiz. Yon tomonda ko'rib turganingiz — O'zbekiston davlat jahon tillari universiteti rektori I. To'xtasinov tomonidan imzolangan rasmiy kafolat xatidir.
+            </motion.p>
+            <motion.p 
+              className="certificate-intro"
+              variants={itemVariants}
+            >
+              Ushbu hujjatga ko'ra:
+            </motion.p>
             <motion.ul 
               className="certificate-features"
               variants={containerVariants}
             >
               {[
-                "Birgina smartfon yoki kompyuter bilan istalgan joydan ingliz tilini o'rganing",
-                "Ustozlarimiz CELTA va IELTS 9.0 sertifikatiga ega malakali mutaxassislar",
-                "Student App orqali qulay va to'liq nazoratdagi darslar",
-                "Online ta'lim formati offlayn ta'lim sifati darajasida",
-                "Qat'iy nazorat va barqaror qo'llab-quvvatlash"
+                "Unicum Foundation tinglovchilari universitetning hamkorlik dasturiga kiritilgan.",
+                "CEFR B1 darajasidagi ingliz tili sertifikatiga hamda 21-asr ko'nikmalari bo'yicha maxsus bilimga ega bo'lgan bitiruvchilarimiz O'zDJTUga to'g'ridan-to'g'ri talabalikka qabul qilinadilar.",
+                "Ushbu dastur doirasida 400 nafar o'rin ajratilgan.",
+                "Bu shunchaki kurs emas, bu sizning Xitoy, Rossiya, Belarus va boshqa davlatlardagi nufuzli oliygohlar bilan hamkorlikdagi dasturga kirishingiz uchun qonuniy asosdir."
               ].map((text, index) => (
                 <motion.li key={index} variants={itemVariants}>
                   <span className="feature-icon">✓</span>
@@ -91,7 +96,7 @@ const Certificate = () => {
               className="certificate-conclusion"
               variants={itemVariants}
             >
-              Endi ingliz tilini o'rganish imkoniyati hamma uchun ochiq! Bu - erkinlik, zamonaviy ta'lim va INTER NATION sifati!
+              Eslatma: Talabalikka qabul qilish O'zDJTU tomonidan belgilangan tartibda amalga oshiriladi. Ta'lim jarayoni, kontrakt narxlari va o'qish muddati bilan bog'liq barcha savollar yuzasidan bevosita O'zDJTU qabul komissiyasiga murojaat qilishingizni so'raymiz.
             </motion.p>
           </motion.div>
         </div>

@@ -108,11 +108,11 @@ const Header = () => {
           </ul>
 
           <div className="navbar-right">
-            <a href="tel:+998787777707" className="phone-contact">
+            <a href="tel:+998781138838" className="phone-contact">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122L9.65 12.2a.678.678 0 0 1-.64-.19l-2.743-2.743a.678.678 0 0 1-.19-.64l.5-2.307a.678.678 0 0 0-.122-.58L3.654 1.328z" fill="currentColor"/>
               </svg>
-              <span>+998 (78) 777 77 07</span>
+              <span>+998 (78) 113 88 38</span>
             </a>
           </div>
         </motion.div>
@@ -136,7 +136,7 @@ const Header = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            INTER NATION
+            UNICUM FOUNDATION
           </motion.h1>
           <motion.h2 
             className="hero-subtitle"
@@ -152,7 +152,7 @@ const Header = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.1 }}
           >
-            "Unicum Foundation"da bilim oling va Oʻzbekiston davlat jahon tillari universitetining qo'shma ta'lim dasturlariga imtiyozli qabul qilinish imkoniyatini qo'lga kiriting!
+            Oʻzbekiston davlat jahon tillari universitetining qo'shma ta'lim dasturlariga imtiyozli asosda imtihonsiz qabul qilinadigan 400 ta talabadan biri bo'lish imkoniyatini qo'lga kiriting!
           </motion.p>
           <motion.button 
             className="cta-button"

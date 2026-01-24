@@ -48,7 +48,7 @@ const Footer = () => {
 
             <div className="footer-social">
               <a 
-                href="https://t.me/inter_nation" 
+                href="https://t.me/unicum_foundation" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -58,7 +58,7 @@ const Footer = () => {
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.13-.31-1.09-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" fill="currentColor"/>
                 </svg>
               </a>
-              <a 
+              {/* <a 
                 href="https://youtube.com/@inter_nation" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -79,9 +79,10 @@ const Footer = () => {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/>
                 </svg>
-              </a>
+              </a> */}
               <a 
-                href="https://instagram.com/inter_nation" 
+                href="https://www.instagram.com/unicum_foundation
+" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -92,7 +93,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="mailto:info@internation.uz" 
+                href="mailto:info@unicum.uz" 
                 className="social-icon"
                 aria-label="Email"
               >
@@ -103,8 +104,7 @@ const Footer = () => {
             </div>
 
             <div className="footer-copyright">
-              <p>© 2013-2026 — Barcha huquqlar himoyalangan</p>
-              <a href="#offer" className="footer-link">Ommaviy offerta</a>
+              <p>© 2024-2026 — Barcha huquqlar himoyalangan</p>
             </div>
           </div>
 
@@ -117,13 +117,14 @@ const Footer = () => {
                   <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
                     <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122L9.65 12.2a.678.678 0 0 1-.64-.19l-2.743-2.743a.678.678 0 0 1-.19-.64l.5-2.307a.678.678 0 0 0-.122-.58L3.654 1.328z" fill="currentColor"/>
                   </svg>
-                  <a href="tel:+998787777707" className="contact-link">+998 (78) 777 77 07</a>
+                  <a href="tel:+998781138838" className="contact-link">+998(78) 113 88 38
+                  </a>
                 </div>
                 <div className="contact-item">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
                   </svg>
-                  <a href="mailto:info@internation.uz" className="contact-link">info@internation.uz</a>
+                  <a href="mailto:info@unicum.uz" className="contact-link">info@unicum.uz</a>
                 </div>
                 <div className="contact-item">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
