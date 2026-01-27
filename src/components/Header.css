@@ -2,12 +2,34 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   padding-top: 100px;
+  overflow: hidden;
+}
+
+/* Background Video Wrapper */
+.header-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.header-background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .header::before {
@@ -27,7 +49,7 @@
   top: 5px;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 100;
   padding: 0;
   width: 100%;
 }
@@ -237,7 +259,7 @@
 /* Hero Section Styles */
 .hero-section {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   flex: 1;
   display: flex;
   align-items: flex-end;

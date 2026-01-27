@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { AdvancedVideo } from '@cloudinary/react';
+import { cld } from '../config/cloudinary';
 import './Header.css';
-import bgImage from '../assets/bg.jpg';
 import logoImage from '../assets/logo.png';
 
 const Header = () => {
@@ -57,8 +58,25 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Cloudinary video yaratish
+  // 'sample' o'rniga Cloudinary'dagi video public ID ni kiriting
+  // Masalan: 'videos/hero-background' yoki 'background-video'
+  const backgroundVideo = cld.video('gf_zgqpgq');
+
   return (
-    <header className="header" style={{ backgroundImage: `url(${bgImage})` }}>
+    <header className="header">
+      {/* Background Video */}
+      <div className="header-video-wrapper">
+        <AdvancedVideo
+          cldVid={backgroundVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="header-background-video"
+        />
+      </div>
       <motion.nav 
         className="navbar"
         initial={{ y: -100, opacity: 0 }}

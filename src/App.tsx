@@ -6,20 +6,23 @@ import Students from './components/Students'
 import Price from './components/Price'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
+import { CloudinaryProvider } from './context/CloudinaryProvider'
 import './App.css'
 
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <Online />
-      <About />
-      <Certificate />
-      <Students />
-      <Price />
-      <FAQ />
-      <Footer />
-    </div>
+    <CloudinaryProvider>
+      <div className="app">
+        <Header />
+        <Online />
+        <About />
+        <Certificate />
+        <Students />
+        <Price />
+        <FAQ />
+        <Footer />
+      </div>
+    </CloudinaryProvider>
   )
 }
 
