@@ -273,12 +273,15 @@
 .video-modal-content {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 400px; /* Shorts format uchun */
   max-height: 90vh;
   background: #000;
   border-radius: 12px;
   overflow: hidden;
   animation: slideUp 0.3s ease;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes slideUp {
@@ -298,6 +301,8 @@
   right: 1rem;
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
@@ -309,11 +314,20 @@
   z-index: 10001;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  padding: 0;
+  margin: 0;
 }
 
 .video-modal-close:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
+}
+
+.video-modal-close svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  pointer-events: none;
 }
 
 .video-modal-iframe-wrapper {
@@ -332,15 +346,58 @@
   height: 100%;
 }
 
+/* YouTube Shorts uchun maxsus stillar */
+.video-modal-iframe-wrapper-shorts {
+  position: relative;
+  width: 100%;
+  padding-bottom: 177.78%; /* 9:16 aspect ratio - shorts format */
+  height: 0;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #000;
+}
+
+.video-modal-iframe-shorts {
+  border-radius: 12px;
+  border: none;
+}
+
 @media (max-width: 768px) {
   .video-modal {
     padding: 1rem;
   }
 
+  .video-modal-content {
+    max-width: 100%;
+    max-height: 85vh;
+  }
+
+  .video-modal-iframe-wrapper-shorts {
+    max-width: 100%;
+    padding-bottom: 177.78%; /* 9:16 aspect ratio */
+  }
+
   .video-modal-close {
     width: 35px;
     height: 35px;
+    min-width: 35px;
+    min-height: 35px;
     top: 0.5rem;
     right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-modal-content {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .video-modal-iframe-wrapper-shorts {
+    border-radius: 8px;
+  }
+
+  .video-modal-iframe-shorts {
+    border-radius: 8px;
   }
 }

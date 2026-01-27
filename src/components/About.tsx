@@ -1,15 +1,81 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './About.css';
 
 const About = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
+  // YouTube URL'dan video ID ni olish funksiyasi
+  const getYouTubeVideoId = (url: string): string | null => {
+    if (!url) return null;
+    
+    // Agar allaqachon embed formatida bo'lsa
+    if (url.includes('youtube.com/embed/')) {
+      const match = url.match(/embed\/([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : null;
+    }
+    
+    // YouTube shorts URL formatini tekshirish
+    if (url.includes('/shorts/')) {
+      const match = url.match(/\/shorts\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        return match[1].split('?')[0];
+      }
+    } 
+    // youtu.be format
+    else if (url.includes('youtu.be/')) {
+      const match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        return match[1].split('?')[0];
+      }
+    } 
+    // watch?v= format
+    else if (url.includes('watch?v=')) {
+      const match = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        return match[1].split('&')[0];
+      }
+    }
+    
+    return null;
+  };
+
+  // YouTube shorts URL'ni embed formatiga o'tkazish funksiyasi
+  const convertToEmbedUrl = (url: string): string => {
+    if (!url) return '';
+    
+    // Agar allaqachon embed formatida bo'lsa, qaytaradi
+    if (url.includes('youtube.com/embed/')) {
+      return url;
+    }
+    
+    const videoId = getYouTubeVideoId(url);
+    
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    
+    // Agar hech qanday format topilmasa, asl URL'ni qaytaradi
+    return url;
+  };
+
+  // YouTube video'dan thumbnail URL olish funksiyasi
+  const getYouTubeThumbnail = (url: string, quality: 'maxresdefault' | 'hqdefault' | 'mqdefault' | 'sddefault' = 'maxresdefault'): string => {
+    const videoId = getYouTubeVideoId(url);
+    
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+    }
+    
+    // Agar video ID topilmasa, default rasm qaytaradi
+    return 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop';
+  };
+
   const aboutItems = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // YouTube video URL
+      image: getYouTubeThumbnail('https://www.youtube.com/shorts/tHm6ve1tffs', 'maxresdefault'), // YouTube'dan thumbnail
+      videoUrl: 'https://www.youtube.com/shorts/tHm6ve1tffs', // YouTube shorts URL
       name: 'Alimbekova Zulhumor',
       position: "Psixologiya yo'nalishi talabasi",
       title: "Siz uchun yangi imkoniyat!",
@@ -25,7 +91,7 @@ const About = () => {
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop',
+      image: getYouTubeThumbnail('https://www.youtube.com/embed/dQw4w9WgXcQ', 'maxresdefault'), // YouTube'dan thumbnail
       videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // YouTube video URL
       name: 'Karimov Aziz',
       position: "Informatika yo'nalishi talabasi",
@@ -42,7 +108,7 @@ const About = () => {
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop',
+      image: getYouTubeThumbnail('https://www.youtube.com/embed/dQw4w9WgXcQ', 'maxresdefault'), // YouTube'dan thumbnail
       videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // YouTube video URL
       name: 'Toshmatova Malika',
       position: "Iqtisodiyot yo'nalishi talabasi",
@@ -60,7 +126,16 @@ const About = () => {
   ];
 
   const handlePlayClick = (videoUrl: string) => {
-    setSelectedVideo(videoUrl);
+    // YouTube shorts URL'ni embed formatiga o'tkazish
+    const embedUrl = convertToEmbedUrl(videoUrl);
+    console.log('🎬 Video bosildi!');
+    console.log('📹 Original URL:', videoUrl);
+    console.log('✅ Converted URL:', embedUrl);
+    if (!embedUrl) {
+      console.error('❌ URL konvertatsiya qilinmadi!');
+      return;
+    }
+    setSelectedVideo(embedUrl);
   };
 
   const closeModal = () => {
@@ -131,9 +206,13 @@ const About = () => {
                       />
                       <motion.div 
                         className="play-button"
-                        onClick={() => handlePlayClick(item.videoUrl)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePlayClick(item.videoUrl);
+                        }}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
+                        style={{ pointerEvents: 'auto', cursor: 'pointer' }}
                       >
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <defs>
@@ -208,45 +287,71 @@ const About = () => {
       </motion.section>
 
     {/* Video Modal */}
-    {selectedVideo && (
-      <motion.div 
-        className="video-modal" 
-        onClick={closeModal}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
+    <AnimatePresence>
+      {selectedVideo && (
         <motion.div 
-          className="video-modal-content" 
-          onClick={(e) => e.stopPropagation()}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          className="video-modal" 
+          onClick={closeModal}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
-          <motion.button 
-            className="video-modal-close" 
-            onClick={closeModal}
-            whileHover={{ scale: 1.1, rotate: 90 }}
-            whileTap={{ scale: 0.9 }}
+          <motion.div 
+            className="video-modal-content" 
+            onClick={(e) => e.stopPropagation()}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </motion.button>
-          <div className="video-modal-iframe-wrapper">
-            <iframe
-              src={selectedVideo || undefined}
-              title="Video Player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="video-modal-iframe"
-            ></iframe>
-          </div>
+            <motion.button 
+              className="video-modal-close" 
+              onClick={closeModal}
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Close video modal"
+            >
+              <svg 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ display: 'block', flexShrink: 0 }}
+              >
+                <path 
+                  d="M18 6L6 18M6 6l12 12" 
+                  stroke="white" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.button>
+            <div className="video-modal-iframe-wrapper video-modal-iframe-wrapper-shorts">
+              {selectedVideo && (
+                <iframe
+                  src={`${selectedVideo}?autoplay=1&rel=0&modestbranding=1`}
+                  title="Video Player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="video-modal-iframe video-modal-iframe-shorts"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    border: 'none'
+                  }}
+                />
+              )}
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    )}
+      )}
+    </AnimatePresence>
     </>
   );
 };
