@@ -151,7 +151,6 @@ const Certificate = () => {
                 src={unicumPdf}
                 className="certificate-pdf-viewer"
                 title="Unicum Foundation Certificate PDF"
-                type="application/pdf"
               />
             </motion.div>
           </motion.div>

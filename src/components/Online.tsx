@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/scrollbar';
+import 'swiper/swiper-bundle.css';
 import './Online.css';
 
 const Online = () => {
