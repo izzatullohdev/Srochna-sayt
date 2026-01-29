@@ -218,6 +218,7 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 }}
+                    style={{ fontStyle: 'italic' }}
                   >
                     {item.description}
                   </motion.p>

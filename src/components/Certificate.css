@@ -122,7 +122,7 @@
   line-height: 1.6;
   margin: 0;
   font-weight: 500;
-  font-style: italic;
+  font-style: italic !important;
   padding-top: 0.5rem;
   border-top: 2px solid #e0e0e0;
 }

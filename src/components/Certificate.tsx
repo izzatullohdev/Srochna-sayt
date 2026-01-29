@@ -116,6 +116,7 @@ const Certificate = () => {
             <motion.p 
               className="certificate-conclusion"
               variants={itemVariants}
+              style={{ fontStyle: 'italic' }}
             >
               {t('certificate.note')}
             </motion.p>
