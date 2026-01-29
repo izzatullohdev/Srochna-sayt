@@ -932,10 +932,12 @@
 
   .header {
     padding-top: 100px;
+    min-height: 70vh;
   }
 
   .hero-section {
     padding: 2rem 1rem;
+   
   }
 
   .hero-title {

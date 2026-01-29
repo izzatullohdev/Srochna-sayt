@@ -57,13 +57,6 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.video-thumbnail {
-  position: relative;
-  width: 100%;
-  padding-top: 177.78%; /* 9:16 aspect ratio - YouTube Shorts format */
-  overflow: hidden;
-  background: #ddd;
-}
 
 .thumbnail-image {
   position: absolute;

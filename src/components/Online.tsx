@@ -114,10 +114,10 @@ const Online = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
           >
-            <div className="slider-header">
+            {/* <div className="slider-header">
               <h3 className="slider-brand">INTER NATION</h3>
               <h4 className="slider-online">ONLINE</h4>
-            </div>
+            </div> */}
             <Swiper
               modules={[Scrollbar, Autoplay]}
               spaceBetween={0}

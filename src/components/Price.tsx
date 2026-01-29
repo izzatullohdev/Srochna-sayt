@@ -113,7 +113,9 @@ const Price = () => {
                     return (
                       <motion.li key={index} variants={itemVariants}>
                         <span className="feature-icon">✓</span>
-                        <strong>{label}:</strong>{description}
+                        <span className="feature-text">
+                          <strong>{label}:</strong>{description}
+                        </span>
                       </motion.li>
                     );
                   })}

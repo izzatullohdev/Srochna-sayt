@@ -125,9 +125,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 12px;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .laptop-screen {
