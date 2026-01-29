@@ -199,7 +199,7 @@ const Students = () => {
           <Swiper
             modules={[Autoplay, Pagination]}
             spaceBetween={20}
-            slidesPerView={4}
+            slidesPerView={2}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
@@ -215,7 +215,7 @@ const Students = () => {
                 spaceBetween: 10,
               },
               480: {
-                slidesPerView: 1,
+                slidesPerView: 1.5,
                 spaceBetween: 15,
               },
               640: {
@@ -223,11 +223,11 @@ const Students = () => {
                 spaceBetween: 15,
               },
               1024: {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
               1280: {
-                slidesPerView: 4,
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
             }}

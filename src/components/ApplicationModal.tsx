@@ -106,6 +106,10 @@ const ApplicationModal = () => {
         });
       }
 
+      // Sertifikat qiymatini "bor/yoq" formatiga o'tkazish
+      const certificateValue = formData.hasCertificate === t('modal.form.yes') ? 'bor' : 
+                               formData.hasCertificate === t('modal.form.no') ? 'yoq' : '';
+
       // Bitrix24'ga contact qo'shish - aniq format
       const contactData = {
         NAME: name || formData.fullName,
@@ -113,7 +117,12 @@ const ApplicationModal = () => {
         PHONE: phones,
         COMMENTS: `Ota-onaning telefon raqami: ${cleanParentPhone || 'Kiritilmagan'}\nYashash hududi: ${formData.region || 'Kiritilmagan'}\nIngliz tili darajasi: ${formData.englishLevel || 'Kiritilmagan'}\nSertifikat: ${formData.hasCertificate || 'Kiritilmagan'}`,
         SOURCE_ID: 'WEB',
-       
+        // Custom fields
+        UF_CRM_1769674454: cleanParentPhone || '', // Ota-onasi telefon raqami (chislo)
+        UF_CRM_1769674491: formData.region || '', // Yashash hududi (adres)
+        UF_CRM_1769674557: formData.englishLevel || '', // Ingliz tili darajasi (Stroka)
+        UF_CRM_1753422572: certificateValue, // Sertifikat (spisok "bor/yoq")
+        CATEGORY_ID: 22, // Category ID
       };
 
       const response = await addContactToBitrix24(contactData);
@@ -381,7 +390,7 @@ const ApplicationModal = () => {
                           disabled={isSubmitting}
                           style={{ cursor: 'pointer' }}
                         />
-                        <span>{t('modal.form.yes')}</span>
+                        <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.yes')}</span>
                       </label>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                         <input
@@ -393,7 +402,7 @@ const ApplicationModal = () => {
                           disabled={isSubmitting}
                           style={{ cursor: 'pointer' }}
                         />
-                        <span>{t('modal.form.no')}</span>
+                        <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.no')}</span>
                       </label>
                     </div>
                   </div>

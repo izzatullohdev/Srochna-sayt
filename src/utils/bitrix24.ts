@@ -10,6 +10,12 @@ interface Bitrix24ContactData {
   COMMENTS?: string;
   ADDRESS?: string;
   SOURCE_ID?: string;
+  // Custom fields
+  UF_CRM_1769674454?: string; // Ota-onasi telefon raqami (chislo)
+  UF_CRM_1769674491?: string; // Yashash hududi (adres)
+  UF_CRM_1769674557?: string; // Ingliz tili darajasi (Stroka)
+  UF_CRM_1753422572?: string; // Sertifikat (spisok "bor/yoq")
+  CATEGORY_ID?: number; // Category ID
 }
 
 interface Bitrix24Response {
@@ -37,16 +43,50 @@ export const addContactToBitrix24 = async (
   const webhookUrl = 'https://crm.usatportal.uz/rest/462/k9qpswrdpg6qtefp/crm.contact.add.json';
 
   try {
+    interface Bitrix24RequestFields {
+      NAME: string;
+      LAST_NAME: string;
+      PHONE: Array<{ VALUE: string; VALUE_TYPE: string }>;
+      EMAIL: Array<{ VALUE: string; VALUE_TYPE: string }>;
+      COMMENTS: string;
+      ADDRESS: string;
+      SOURCE_ID: string;
+      UF_CRM_1769674454?: string;
+      UF_CRM_1769674491?: string;
+      UF_CRM_1769674557?: string;
+      UF_CRM_1753422572?: string;
+      CATEGORY_ID?: number;
+    }
+
+    const fields: Bitrix24RequestFields = {
+      NAME: contactData.NAME || '',
+      LAST_NAME: contactData.LAST_NAME || '',
+      PHONE: contactData.PHONE || [],
+      EMAIL: contactData.EMAIL || [],
+      COMMENTS: contactData.COMMENTS || '',
+      ADDRESS: contactData.ADDRESS || '',
+      SOURCE_ID: contactData.SOURCE_ID || 'WEB',
+    };
+
+    // Custom fields qo'shish
+    if (contactData.UF_CRM_1769674454 !== undefined) {
+      fields.UF_CRM_1769674454 = contactData.UF_CRM_1769674454;
+    }
+    if (contactData.UF_CRM_1769674491 !== undefined) {
+      fields.UF_CRM_1769674491 = contactData.UF_CRM_1769674491;
+    }
+    if (contactData.UF_CRM_1769674557 !== undefined) {
+      fields.UF_CRM_1769674557 = contactData.UF_CRM_1769674557;
+    }
+    if (contactData.UF_CRM_1753422572 !== undefined) {
+      fields.UF_CRM_1753422572 = contactData.UF_CRM_1753422572;
+    }
+    if (contactData.CATEGORY_ID !== undefined) {
+      fields.CATEGORY_ID = contactData.CATEGORY_ID;
+    }
+
     const requestBody = {
-      fields: {
-        NAME: contactData.NAME || '',
-        LAST_NAME: contactData.LAST_NAME || '',
-        PHONE: contactData.PHONE || [],
-        EMAIL: contactData.EMAIL || [],
-        COMMENTS: contactData.COMMENTS || '',
-        ADDRESS: contactData.ADDRESS || '',
-        SOURCE_ID: contactData.SOURCE_ID || 'WEB',
-      },
+      fields: fields,
     };
 
     console.log('Bitrix24 Request URL:', webhookUrl);

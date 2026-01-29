@@ -43,7 +43,7 @@
 
 .testimonial-card {
   width: 100%;
-  max-width: 360px; /* YouTube Shorts kengligi */
+  max-width: 280px; /* Kenglik kamaytirildi - 2 ta element ko'rinishi uchun */
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
@@ -207,7 +207,7 @@
   }
 
   .testimonial-card {
-    max-width: 340px;
+    max-width: 280px;
   }
 }
 
@@ -229,7 +229,7 @@
   }
 
   .testimonial-card {
-    max-width: 320px;
+    max-width: 280px;
   }
 }
 
@@ -251,7 +251,7 @@
   }
 
   .testimonial-card {
-    max-width: 300px;
+    max-width: 280px;
   }
 
   .card-name {
