@@ -28,16 +28,26 @@ const DEFAULT_LANGUAGE: Language = 'uz';
 // Load translations dynamically
 const loadTranslations = async (lang: Language): Promise<Translations> => {
   try {
-    const translations = await import(`./${lang}.json`);
-    return translations.default;
+    // Use explicit imports to avoid Vite dynamic import warnings
+    if (lang === 'uz') {
+      const translations = await import('./locales/uz.json');
+      return translations.default;
+    } else if (lang === 'ru') {
+      const translations = await import('./locales/ru.json');
+      return translations.default;
+    }
+    // Fallback to Uzbek
+    const fallback = await import('./locales/uz.json');
+    return fallback.default;
   } catch (error) {
     console.error(`Failed to load translations for ${lang}:`, error);
     // Fallback to Uzbek if translation file not found
-    if (lang !== 'uz') {
-      const fallback = await import('./uz.json');
+    try {
+      const fallback = await import('./locales/uz.json');
       return fallback.default;
+    } catch {
+      return {};
     }
-    return {};
   }
 };
 
