@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import { useTranslation } from '../i18n';
 import './Students.css';
@@ -105,6 +105,27 @@ const Students = () => {
       image: getYouTubeThumbnail('https://youtube.com/shorts/3qzpAiJoOSo', 'maxresdefault'),
       videoUrl: 'https://youtube.com/shorts/3qzpAiJoOSo',
     },
+    {
+      id: 5,
+      name: '',
+      specialization: '',
+      image: getYouTubeThumbnail('https://youtube.com/shorts/F241rIoGxLY', 'maxresdefault'),
+      videoUrl: 'https://youtube.com/shorts/F241rIoGxLY',
+    },
+    {
+      id: 6,
+      name: '',
+      specialization: '',
+      image: getYouTubeThumbnail('https://youtube.com/shorts/dY-Li9hB-2c', 'maxresdefault'),
+      videoUrl: 'https://youtube.com/shorts/dY-Li9hB-2c',
+    },
+    {
+      id: 7,
+      name: '',
+      specialization: '',
+      image: getYouTubeThumbnail('https://youtube.com/shorts/C2zcv09L6b8', 'maxresdefault'),
+      videoUrl: 'https://youtube.com/shorts/C2zcv09L6b8',
+    },
   ];
 
   const handlePlayClick = (videoUrl: string) => {
@@ -176,12 +197,16 @@ const Students = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           <Swiper
-            modules={[Autoplay]}
+            modules={[Autoplay, Pagination]}
             spaceBetween={20}
             slidesPerView={4}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
             }}
             loop={true}
             breakpoints={{

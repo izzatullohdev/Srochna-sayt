@@ -166,6 +166,36 @@
   opacity: 0.5;
 }
 
+/* Swiper Pagination Styles */
+.students-swiper :global(.swiper-pagination) {
+  position: relative;
+  margin-top: 2rem;
+  bottom: auto;
+  text-align: center;
+}
+
+.students-swiper :global(.swiper-pagination-bullet) {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 140, 0, 0.5);
+  opacity: 1;
+  margin: 0 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.students-swiper :global(.swiper-pagination-bullet-active) {
+  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  width: 30px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.4);
+}
+
+.students-swiper :global(.swiper-pagination-bullet:hover) {
+  background: rgba(255, 140, 0, 0.8);
+  transform: scale(1.2);
+}
+
 /* Responsive Design */
 @media (max-width: 1280px) {
   .students-header {
