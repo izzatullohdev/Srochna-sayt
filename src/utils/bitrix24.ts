@@ -2,18 +2,18 @@
  * Bitrix24 CRM API utility funksiyalari
  */
 
-interface Bitrix24LeadData {
-  TITLE: string;
+interface Bitrix24ContactData {
   NAME?: string;
   LAST_NAME?: string;
-  PHONE: Array<{ VALUE: string; VALUE_TYPE: string }>;
-  SOURCE_ID?: string;
-  STATUS_ID?: string;
+  PHONE?: Array<{ VALUE: string; VALUE_TYPE: string }>;
+  EMAIL?: Array<{ VALUE: string; VALUE_TYPE: string }>;
   COMMENTS?: string;
+  ADDRESS?: string;
+  SOURCE_ID?: string;
 }
 
 interface Bitrix24Response {
-  result?: number; // Lead ID
+  result?: number; // Contact ID
   error?: string;
   error_description?: string;
 }
@@ -26,31 +26,31 @@ interface Bitrix24ErrorResponse {
 }
 
 /**
- * Bitrix24'ga lead qo'shish
- * @param leadData - Lead ma'lumotlari
+ * Bitrix24'ga contact qo'shish
+ * @param contactData - Contact ma'lumotlari
  * @returns Promise<Bitrix24Response>
  */
-export const addLeadToBitrix24 = async (
-  leadData: Bitrix24LeadData
+export const addContactToBitrix24 = async (
+  contactData: Bitrix24ContactData
 ): Promise<Bitrix24Response> => {
-  const bitrix24WebhookUrl = import.meta.env.VITE_BITRIX24_WEBHOOK_URL;
-
-  if (!bitrix24WebhookUrl) {
-    throw new Error('Bitrix24 webhook URL topilmadi. Iltimos, .env faylini tekshiring.');
-  }
-
-  // Webhook URL yaratish
-  const webhookUrl = `${bitrix24WebhookUrl}crm.lead.add.json`;
+  // To'g'ridan-to'g'ri webhook URL
+  const webhookUrl = 'https://crm.usatportal.uz/rest/462/k9qpswrdpg6qtefp/crm.contact.add.json';
 
   try {
     const requestBody = {
       fields: {
-        TITLE: leadData.TITLE,
-        NAME: leadData.NAME,
-        PHONE: leadData.PHONE,
+        NAME: contactData.NAME || '',
+        LAST_NAME: contactData.LAST_NAME || '',
+        PHONE: contactData.PHONE || [],
+        EMAIL: contactData.EMAIL || [],
+        COMMENTS: contactData.COMMENTS || '',
+        ADDRESS: contactData.ADDRESS || '',
+        SOURCE_ID: contactData.SOURCE_ID || 'WEB',
       },
     };
 
+    console.log('Bitrix24 Request URL:', webhookUrl);
+    console.log('Bitrix24 Request Body:', JSON.stringify(requestBody, null, 2));
 
     const response = await fetch(webhookUrl, {
       method: 'POST',
@@ -88,7 +88,7 @@ export const addLeadToBitrix24 = async (
       if (response.status === 401 || response.status === 403) {
         throw new Error(
           `Webhook token yetarli huquqlarga ega emas. ` +
-          `Bitrix24'da webhook yaratishda "CRM" va "Lead qo'shish" huquqlarini berish kerak. ` +
+          `Bitrix24'da webhook yaratishda "CRM" va "Contact qo'shish" huquqlarini berish kerak. ` +
           `Xatolik: ${errorMessage}`
         );
       }

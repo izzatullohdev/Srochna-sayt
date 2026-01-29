@@ -59,78 +59,36 @@ const About = () => {
     return url;
   };
 
-  // YouTube video'dan thumbnail URL olish funksiyasi
-  const getYouTubeThumbnail = (url: string, quality: 'maxresdefault' | 'hqdefault' | 'mqdefault' | 'sddefault' = 'maxresdefault'): string => {
-    const videoId = getYouTubeVideoId(url);
-    
-    if (videoId) {
-      return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
-    }
-    
-    // Agar video ID topilmasa, default rasm qaytaradi
-    return 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop';
-  };
+  // Cloudinary rasm URL'ini yaratish
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
+  const publicId = 't5wp4w';
+  
+  // Cloudinary URL yaratish (to'g'ridan-to'g'ri format)
+  const cloudinaryImageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_800,c_fill,q_auto,f_auto/${publicId}`;
+  
 
   const aboutItems = [
     {
       id: 1,
-      image: getYouTubeThumbnail('https://www.youtube.com/shorts/tHm6ve1tffs', 'maxresdefault'), // YouTube'dan thumbnail
+      image: cloudinaryImageUrl, // Cloudinary'dan rasm
       videoUrl: 'https://www.youtube.com/shorts/tHm6ve1tffs', // YouTube shorts URL
       name: 'Alimbekova Zulhumor',
       position: "Psixologiya yo'nalishi talabasi",
-      title: "Siz uchun yangi imkoniyat!",
-      description: "Endilikda ingliz tilini o'rganishga masofa, vaqt, sharoit yoki pul muammo emas!",
+      title: "O'zDJTU va Unicum Foundation: Rasmiy hamkorlik va ishonch",
+      description: "\"Xalqaro standartlarda va chet elda o'qishni xohlayotgan yoshlarga ushbu loyihada qatnashishni shaxsan tavsiya etaman\" — O'zbekiston davlat jahon tillari universiteti \"Qo'shma ta'lim dasturlarini muvofiqlashtirish\" bo'limi boshlig'i Rashidova Feruza Musayevna.",
       features: [
-        "Birgina smartfon yoki kompyuter bilan istalgan joydan ingliz tilini o'rganing",
-        "Ustozlarimiz CELTA va IELTS 9.0 sertifikatiga ega malakali mutaxassislar",
-        "Student App orqali qulay va to'liq nazoratdagi darslar",
-        "Online ta'lim formati offlayn ta'lim sifati darajasida",
-        "Qat'iy nazorat va barqaror qo'llab-quvvatlash"
+        "Oson qabul: DTM imtihonlarisiz, faqat til sertifikati va 21-asr ko'nikmalari orqali to'g'ridan-to'g'ri talabalikka qabul qilinish kafolati",
+        "Xalqaro imkoniyat: 2 yil O'zbekistonda + 2 yil chet elda o'qish",
+        "Bir vaqtning o'zida ham O'zbekiston, ham xorijiy universitet diplomini qo'lga kiritish"
       ],
-      conclusion: "Endi ingliz tilini o'rganish imkoniyati hamma uchun ochiq! Bu - erkinlik, zamonaviy ta'lim va INTER NATION sifati!"
+      conclusion: ""
     },
-    {
-      id: 2,
-      image: getYouTubeThumbnail('https://www.youtube.com/embed/dQw4w9WgXcQ', 'maxresdefault'), // YouTube'dan thumbnail
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // YouTube video URL
-      name: 'Karimov Aziz',
-      position: "Informatika yo'nalishi talabasi",
-      title: "Zamonaviy texnologiyalar bilan ta'lim!",
-      description: "Bizning platformamiz eng so'nggi texnologiyalar bilan jihozlangan va qulay interfeysga ega.",
-      features: [
-        "Real vaqtda video konferensiya darslar",
-        "Interaktiv materiallar va mashqlar",
-        "Shaxsiy progress kuzatuvchi tizim",
-        "24/7 qo'llab-quvvatlash xizmati",
-        "Sertifikat va natijalar bilan ta'minlash"
-      ],
-      conclusion: "Biz bilan ingliz tilini o'rganish oson va qiziqarli bo'ladi!"
-    },
-    {
-      id: 3,
-      image: getYouTubeThumbnail('https://www.youtube.com/embed/dQw4w9WgXcQ', 'maxresdefault'), // YouTube'dan thumbnail
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // YouTube video URL
-      name: 'Toshmatova Malika',
-      position: "Iqtisodiyot yo'nalishi talabasi",
-      title: "Karyera uchun ingliz tili!",
-      description: "Ingliz tili bilimlaringizni oshirib, karyerangizni keyingi bosqichga olib chiqing.",
-      features: [
-        "Biznes ingliz tili kurslari",
-        "IELTS va TOEFL tayyorgarlik",
-        "Xalqaro sertifikatlar",
-        "Karyera maslahatlari",
-        "Taniqli o'qituvchilar bilan darslar"
-      ],
-      conclusion: "Karyerangizni rivojlantirish uchun INTER NATION bilan boshlang!"
-    }
+    
   ];
 
   const handlePlayClick = (videoUrl: string) => {
     // YouTube shorts URL'ni embed formatiga o'tkazish
     const embedUrl = convertToEmbedUrl(videoUrl);
-    console.log('🎬 Video bosildi!');
-    console.log('📹 Original URL:', videoUrl);
-    console.log('✅ Converted URL:', embedUrl);
     if (!embedUrl) {
       console.error('❌ URL konvertatsiya qilinmadi!');
       return;
@@ -199,9 +157,13 @@ const About = () => {
                         className="thumbnail-image"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.3 }}
+                       
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = 'https://via.placeholder.com/600x800?text=Image+Not+Found';
+                          console.error('❌ Rasm yuklanmadi:', item.name);
+                          console.error('❌ Rasm URL:', item.image);
+                          // Fallback rasm
+                          target.src = 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=400&fit=crop';
                         }}
                       />
                       <motion.div 
@@ -225,10 +187,10 @@ const About = () => {
                           <path d="M24 18L42 30L24 42V18Z" fill={`url(#playGradient-${item.id})`}/>
                         </svg>
                       </motion.div>
-                      <div className="video-overlay">
+                      {/* <div className="video-overlay">
                         <div className="video-name">{item.name}</div>
                         <div className="video-position">{item.position}</div>
-                      </div>
+                      </div> */}
                     </div>
                   </motion.div>
 
@@ -257,27 +219,49 @@ const About = () => {
                   >
                     {item.description}
                   </motion.p>
-                  <motion.ul 
-                    className="about-features"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={containerVariants}
-                  >
-                    {item.features.map((feature, idx) => (
-                      <motion.li 
-                        key={idx}
+                  {item.features && item.features.length > 0 && (
+                    <>
+                      <motion.h3 
+                        className="about-features-title"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        style={{
+                          fontSize: '1.2rem',
+                          fontWeight: 600,
+                          color: '#1a1a1a',
+                          marginTop: '1.5rem',
+                          marginBottom: '1rem'
+                        }}
                       >
-                        <span className="feature-icon">✓</span>
-                        {feature}
-                      </motion.li>
-                    ))}
-                  </motion.ul>
-                  <p className="about-conclusion">{item.conclusion}</p>
+                        Ushbu kursda ishtirok etish sizga nima beradi:
+                      </motion.h3>
+                      <motion.ul 
+                        className="about-features"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={containerVariants}
+                      >
+                        {item.features.map((feature, idx) => (
+                          <motion.li 
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                          >
+                            <span className="feature-icon">✓</span>
+                            {feature}
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </>
+                  )}
+                  {item.conclusion && (
+                    <p className="about-conclusion">{item.conclusion}</p>
+                  )}
                 </motion.div>
                 </div>
               </motion.div>

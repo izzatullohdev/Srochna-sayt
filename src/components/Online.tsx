@@ -5,33 +5,26 @@ import 'swiper/swiper-bundle.css';
 import './Online.css';
 
 const Online = () => {
+  // Cloudinary cloud name
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
+  
+  // Cloudinary rasmlarini to'g'ridan-to'g'ri URL formatida yaratish
+  const image1 = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_400,c_fill,q_auto,f_auto/ojxcjb`;
+  const image2 = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_400,c_fill,q_auto,f_auto/2-r_dd9mlt`;
+
+  // Debug uchun console.log
+  console.log('Cloudinary Cloud Name:', cloudName);
+  console.log('Cloudinary Image 1 URL:', image1);
+  console.log('Cloudinary Image 2 URL:', image2);
+
   const slides = [
     {
       id: 1,
-      participants: [
-        { name: 'Teacher', position: 'top-left' },
-        { name: 'Student 1', position: 'top-right' },
-        { name: 'Student 2', position: 'bottom-left' },
-        { name: 'Student 3', position: 'bottom-right' },
-      ]
+      image: image1,
     },
     {
       id: 2,
-      participants: [
-        { name: 'Teacher', position: 'top-left' },
-        { name: 'Student 1', position: 'top-right' },
-        { name: 'Student 2', position: 'bottom-left' },
-        { name: 'Student 3', position: 'bottom-right' },
-      ]
-    },
-    {
-      id: 3,
-      participants: [
-        { name: 'Teacher', position: 'top-left' },
-        { name: 'Student 1', position: 'top-right' },
-        { name: 'Student 2', position: 'bottom-left' },
-        { name: 'Student 3', position: 'bottom-right' },
-      ]
+      image: image2,
     },
   ];
 
@@ -144,15 +137,21 @@ const Online = () => {
                 <SwiperSlide key={slide.id}>
                   <div className="laptop-container">
                     <div className="laptop-screen">
-                      <div className="video-conference">
-                        {slide.participants.map((participant, index) => (
-                          <div key={index} className={`participant ${participant.position}`}>
-                            <div className="participant-avatar">
-                              <div className="avatar-circle"></div>
-                            </div>
-                            <div className="participant-name">{participant.name}</div>
-                          </div>
-                        ))}
+                      <div className="video-conference has-image">
+                        <img 
+                          src={slide.image} 
+                          alt="Video conference" 
+                          className="conference-image"
+                          onLoad={() => {
+                            console.log('✅ Image loaded successfully:', slide.image);
+                          }}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            console.error('❌ Image failed to load:', slide.image);
+                            console.error('Error event:', e);
+                            target.style.display = 'none';
+                          }}
+                        />
                       </div>
                     </div>
                   </div>

@@ -18,9 +18,10 @@
 
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.8fr 1.2fr; /* Rasm kichikroq, matn kattaroq */
   gap: 3rem;
-  align-items: center;
+  align-items: start; /* Yuqoridan boshlash - balandlikni kamaytirish */
+  min-height: auto; /* Minimal balandlikni olib tashlash */
 }
 
 .about-item.image-right .about-content {
@@ -33,17 +34,28 @@
 
 .about-media {
   position: relative;
+  max-width: 300px; /* Rasm maksimal kengligi - kichikroq */
+  width: 100%;
+  margin: 0 auto;
+  display: block; /* Ko'rinishi uchun */
+  visibility: visible; /* Ko'rinishi uchun */
+  opacity: 1; /* Ko'rinishi uchun */
 }
 
 .video-thumbnail {
   position: relative;
   width: 100%;
+  max-width: 300px; /* Kichikroq kenglik */
+  min-height: 200px; /* Minimal balandlik - ko'rinishi uchun */
   aspect-ratio: 3 / 4;
   border-radius: 15px;
   overflow: hidden;
   border: 2px solid #f0f0f0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   background: #f5f5f5;
+  margin: 0 auto;
+  display: block; /* Ko'rinishi uchun */
+  visibility: visible; /* Ko'rinishi uchun */
 }
 
 .video-thumbnail img,
@@ -51,10 +63,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  display: block !important; /* Ko'rinishi uchun */
   position: absolute;
   top: 0;
   left: 0;
+  visibility: visible !important; /* Ko'rinishi uchun */
+  opacity: 1 !important; /* Ko'rinishi uchun */
 }
 
 .play-button {
@@ -64,7 +78,8 @@
   transform: translate(-50%, -50%);
   cursor: pointer;
   transition: transform 0.3s ease;
-  z-index: 2;
+  z-index: 10; /* Yuqori z-index - rasm ustida ko'rinishi uchun */
+  pointer-events: auto; /* Click event'lar ishlashi uchun */
 }
 
 .play-button:hover {
@@ -83,6 +98,8 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
   padding: 1.5rem;
   color: white;
+  z-index: 5; /* Play button ostida bo'lishi uchun */
+  pointer-events: none; /* Click event'lar play button'ga o'tishi uchun */
 }
 
 .video-name {
@@ -103,6 +120,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  height: fit-content; /* Kontentga mos balandlik */
 }
 
 .about-title {
@@ -198,6 +216,18 @@
   .about-text.order-1,
   .about-text.order-2 {
     order: unset !important;
+  }
+
+  .about-media {
+    display: block !important; /* Ko'rinishi uchun */
+    visibility: visible !important; /* Ko'rinishi uchun */
+    max-width: 100% !important;
+  }
+
+  .video-thumbnail {
+    display: block !important; /* Ko'rinishi uchun */
+    visibility: visible !important; /* Ko'rinishi uchun */
+    max-width: 100% !important;
   }
 
   .about-title {
@@ -333,7 +363,7 @@
 .video-modal-iframe-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
 }
@@ -350,7 +380,7 @@
 .video-modal-iframe-wrapper-shorts {
   position: relative;
   width: 100%;
-  padding-bottom: 177.78%; /* 9:16 aspect ratio - shorts format */
+  padding-top: 177.78% !important; /* 9:16 aspect ratio - shorts format */
   height: 0;
   overflow: hidden;
   margin: 0 auto;
@@ -374,7 +404,7 @@
 
   .video-modal-iframe-wrapper-shorts {
     max-width: 100%;
-    padding-bottom: 177.78%; /* 9:16 aspect ratio */
+    padding-top: 177.78% !important; /* 9:16 aspect ratio */
   }
 
   .video-modal-close {

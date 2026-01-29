@@ -183,16 +183,18 @@ export const formatPhoneNumber = (phone: string, country: Country): string => {
  */
 export const cleanPhoneNumber = (phone: string, country: Country): string => {
   // Faqat raqamlarni qoldirish
-  const digits = phone.replace(/\D/g, '');
+  let digits = phone.replace(/\D/g, '');
   
-  // Davlat kodini qo'shish
+  // Davlat kodini olib tashlash (raqamlar shaklida)
   const phoneCode = country.phoneCode.replace(/\D/g, '');
   
-  // Agar davlat kodi yo'q bo'lsa, qo'shish
-  if (!digits.startsWith(phoneCode)) {
-    return country.phoneCode + digits;
+  // Agar davlat kodi bilan boshlansa, uni olib tashlash
+  // Bir necha marta takrorlangan bo'lishi mumkin, shuning uchun while loop
+  while (digits.startsWith(phoneCode)) {
+    digits = digits.substring(phoneCode.length);
   }
   
+  // Endi davlat kodini bir marta qo'shamiz
   return country.phoneCode + digits;
 };
 
@@ -203,21 +205,20 @@ export const cleanPhoneNumber = (phone: string, country: Country): string => {
  * @returns To'g'ri yoki noto'g'ri
  */
 export const validatePhoneNumber = (phone: string, country: Country): boolean => {
-  const digits = phone.replace(/\D/g, '');
+  let digits = phone.replace(/\D/g, '');
   const phoneCode = country.phoneCode.replace(/\D/g, '');
   
-  if (!digits.startsWith(phoneCode)) {
-    return false;
+  // Davlat kodini olib tashlash (bir necha marta takrorlangan bo'lishi mumkin)
+  while (digits.startsWith(phoneCode)) {
+    digits = digits.substring(phoneCode.length);
   }
-  
-  const number = digits.substring(phoneCode.length);
   
   // Minimal raqamlar soni
   if (country.code === 'UZ') {
-    return number.length === 9; // 9 raqam
+    return digits.length === 9; // 9 raqam
   } else if (country.code === 'RU' || country.code === 'KZ') {
-    return number.length === 10; // 10 raqam
+    return digits.length === 10; // 10 raqam
   }
   
-  return number.length >= 7; // Minimal 7 raqam
+  return digits.length >= 7; // Minimal 7 raqam
 };
