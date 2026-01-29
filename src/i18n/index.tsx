@@ -1,10 +1,13 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 // Language type definition
 export type Language = 'uz' | 'ru';
 
-// Translation data type
-export type Translations = Record<string, string | Translations>;
+// Translation data type - using recursive type for nested translations
+export type Translations = {
+  [key: string]: string | Translations;
+};
 
 // i18n Context type
 interface I18nContextType {
