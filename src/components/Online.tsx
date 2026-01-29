@@ -2,9 +2,11 @@ import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar, Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
+import { useTranslation } from '../i18n';
 import './Online.css';
 
 const Online = () => {
+  const { t } = useTranslation();
   // Cloudinary cloud name
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
   
@@ -12,10 +14,7 @@ const Online = () => {
   const image1 = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_400,c_fill,q_auto,f_auto/ojxcjb`;
   const image2 = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_400,c_fill,q_auto,f_auto/2-r_dd9mlt`;
 
-  // Debug uchun console.log
-  console.log('Cloudinary Cloud Name:', cloudName);
-  console.log('Cloudinary Image 1 URL:', image1);
-  console.log('Cloudinary Image 2 URL:', image2);
+
 
   const slides = [
     {
@@ -80,31 +79,31 @@ const Online = () => {
               className="online-title"
               variants={itemVariants}
             >
-              Unicum Foundation: xalqaro diplomga ega bo'lish imkoniyati!
+              {t('online.title')}
             </motion.h2>
             <motion.p 
               className="online-intro"
               variants={itemVariants}
             >
-              Biz ingliz tili shunchaki fan emas, balki katta kelajak kaliti ekanligiga ishonamiz. Unicum Foundation — bu o'z oldiga yuksak maqsad qo'ygan 11-sinf o'quvchilari uchun maxsus loyiha.
+              {t('online.intro1')}
             </motion.p>
             <motion.p 
               className="online-intro"
               variants={itemVariants}
             >
-              Bizning vazifamiz aniq: sizni qisqa vaqt ichida CEFR B1 va undan yuqori darajaga olib chiqish. Ammo bu hali hammasi emas.
+              {t('online.intro2')}
             </motion.p>
             <motion.p 
               className="online-intro"
               variants={itemVariants}
             >
-              Dasturni muvaffaqiyatli tugatgan bitiruvchilarimizning 400 tasi maxsus sertifikatga ega bo'ladilar. Ushbu sertifikat sizga O'zbekiston davlat jahon tillari universiteti (O'zDJTU) ning Xitoy, Rossiya, Belarus va boshqa davlatlarning nufuzli universitetlari bilan tashkil etgan qo'shma ta'lim dasturlariga imtihonsiz imtiyoz asosida qabul qilinish imkonini beradi.
+              {t('online.intro3')}
             </motion.p>
             <motion.p 
               className="online-conclusion"
               variants={itemVariants}
             >
-              Biz bilan talaba bo'lish imkoniyatingizni kafolatlang!
+              {t('online.conclusion')}
             </motion.p>
           </motion.div>
 
@@ -142,9 +141,7 @@ const Online = () => {
                           src={slide.image} 
                           alt="Video conference" 
                           className="conference-image"
-                          onLoad={() => {
-                            console.log('✅ Image loaded successfully:', slide.image);
-                          }}
+                          
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             console.error('❌ Image failed to load:', slide.image);

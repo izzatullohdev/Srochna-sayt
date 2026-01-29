@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from '../i18n';
 import './About.css';
 
 const About = () => {
+  const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   // YouTube URL'dan video ID ni olish funksiyasi
@@ -74,12 +76,12 @@ const About = () => {
       videoUrl: 'https://www.youtube.com/shorts/tHm6ve1tffs', // YouTube shorts URL
       name: 'Alimbekova Zulhumor',
       position: "Psixologiya yo'nalishi talabasi",
-      title: "O'zDJTU va Unicum Foundation: Rasmiy hamkorlik va ishonch",
-      description: "\"Xalqaro standartlarda va chet elda o'qishni xohlayotgan yoshlarga ushbu loyihada qatnashishni shaxsan tavsiya etaman\" — O'zbekiston davlat jahon tillari universiteti \"Qo'shma ta'lim dasturlarini muvofiqlashtirish\" bo'limi boshlig'i Rashidova Feruza Musayevna.",
+      title: t('about.title'),
+      description: t('about.description'),
       features: [
-        "Oson qabul: DTM imtihonlarisiz, faqat til sertifikati va 21-asr ko'nikmalari orqali to'g'ridan-to'g'ri talabalikka qabul qilinish kafolati",
-        "Xalqaro imkoniyat: 2 yil O'zbekistonda + 2 yil chet elda o'qish",
-        "Bir vaqtning o'zida ham O'zbekiston, ham xorijiy universitet diplomini qo'lga kiritish"
+        t('about.benefit1'),
+        t('about.benefit2'),
+        t('about.benefit3')
       ],
       conclusion: ""
     },
@@ -235,7 +237,7 @@ const About = () => {
                           marginBottom: '1rem'
                         }}
                       >
-                        Ushbu kursda ishtirok etish sizga nima beradi:
+                        {t('about.benefitsTitle')}
                       </motion.h3>
                       <motion.ul 
                         className="about-features"

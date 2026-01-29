@@ -1,27 +1,29 @@
 import { motion } from 'framer-motion';
 import { HiFire } from 'react-icons/hi';
 import { useModal } from '../context/ModalContext';
+import { useTranslation } from '../i18n';
 import './Price.css';
 
 const Price = () => {
   const { openModal } = useModal();
+  const { t } = useTranslation();
   const pricePlans = [
     {
       id: 1,
-      title: 'Individual English',
-      price: '7 200 000',
-      currency: 'UZS',
-      description: "To'lovni birdaniga yoki bo'lib to'lash orqali amalga oshiring:",
+      title: t('price.plan.title'),
+      price: t('price.plan.price'),
+      currency: t('price.plan.currency'),
+      description: t('price.plan.description'),
       features: [
-        "Qulay bo'lib to'lash: 3 oyga: oyiga 2 400 000 so'mdan, 6 oyga: oyiga 1 200 000 so'mdan",
-        "Narxga nimalar kiradi?",
-        "Ingliz tili (B1+ daraja)",
-        "AI va Soft Skills darslari",
-        "Barcha o'quv qo'llanmalar",
-        "Mock exams (Sinov imtihonlari)",
-        "O'zDJTU qo'shma dasturiga yo'llanma (Sertifikat)"
+        t('price.plan.feature1'),
+        t('price.plan.feature2'),
+        t('price.plan.feature3'),
+        t('price.plan.feature4'),
+        t('price.plan.feature5'),
+        t('price.plan.feature6'),
+        t('price.plan.feature7')
       ],
-      buttonText: "Kursga yozilish"
+      buttonText: t('price.plan.button')
     }
   ];
 
@@ -80,7 +82,7 @@ const Price = () => {
                 className="price-title"
                 variants={itemVariants}
               >
-                Oliy ta'limga kafolatlangan investitsiya
+                {t('price.title')}
               </motion.h2>
               <motion.div 
                 className="price-description"
@@ -90,20 +92,20 @@ const Price = () => {
                   className="price-intro"
                   variants={itemVariants}
                 >
-                  Biz shunchaki ingliz tilini o'rgatmaymiz, biz abituriyentni talaba bo'lishga tayyorlaymiz. To'lov summasiga nafaqat muvaffaqiyatli o'qish uchun barcha zaruriy narsalar, balki zamonaviy dunyo talablariga to'liq javob beradigan ko'nikmalar ham kiritilgan:
+                  {t('price.intro')}
                 </motion.p>
                 <motion.ul 
                   className="price-features-list"
                   variants={containerVariants}
                 >
                   {[
-                    "To'liq o'quv kursi: 0 dan B1 darajasigacha bo'lgan intensiv dastur.",
-                    "AI savodxonligi: O'qish va ishda sun'iy intellekt (ChatGPT, Google Gemini va h.k.) dan samarali foydalanishni o'rgatamiz.",
-                    "21-asr ko'nikmalari: Tanqidiy fikrlash, muammo yechish va liderlik qobiliyatlarini shakllantirish.",
-                    "Professional ustozlar: Yuqori darajaga ega va abituriyentlar bilan ishlash tajribasiga ega mutaxassislar.",
-                    "O'quv materiallari: Barcha kitoblar, qo'llanmalar va audio-video materiallar bepul beriladi.",
-                    "Doimiy nazorat: Ota-onalar uchun o'zlashtirish ko'rsatkichlari bo'yicha hisobotlar.",
-                    "Yakuniy imtihon va sertifikat: O'zDJTU hamkor dasturlariga imtiyozli kirish huquqini beruvchi hujjat."
+                    t('price.feature1'),
+                    t('price.feature2'),
+                    t('price.feature3'),
+                    t('price.feature4'),
+                    t('price.feature5'),
+                    t('price.feature6'),
+                    t('price.feature7')
                   ].map((text, index) => {
                     const parts = text.split(':');
                     const label = parts[0];

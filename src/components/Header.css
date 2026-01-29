@@ -198,6 +198,10 @@
   flex-shrink: 0;
 }
 
+.navbar-right .language-switcher {
+  flex-shrink: 0;
+}
+
 .phone-contact {
   display: flex;
   align-items: center;

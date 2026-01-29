@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiX } from 'react-icons/hi';
+import { useTranslation } from '../i18n';
 import './Certificate.css';
 import pdfImage from '../assets/pdf.png';
 import unicumPdf from '../assets/Unicum.pdf';
 
 const Certificate = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -48,8 +50,8 @@ const Certificate = () => {
           className="certificate-main-title"
           variants={itemVariants}
         >
-          <span style={{ color: '#ff8c00' }}>So'zda emas</span>, hujjatda:<br />
-          O'zDJTU rektorining rasmiy kafolati
+          <span style={{ color: '#ff8c00' }}>{t('certificate.title')}</span><br />
+          {t('certificate.subtitle')}
         </motion.h2>
         
         <div className="certificate-content">
@@ -87,23 +89,23 @@ const Certificate = () => {
               className="certificate-text-title"
               variants={itemVariants}
             >
-              Biz va'da bermaymiz, biz kafolatlaymiz. Yon tomonda ko'rib turganingiz — O'zbekiston davlat jahon tillari universiteti rektori I. To'xtasinov tomonidan imzolangan rasmiy kafolat xatidir.
+              {t('certificate.intro')}
             </motion.p>
             <motion.p 
               className="certificate-intro"
               variants={itemVariants}
             >
-              Ushbu hujjatga ko'ra:
+              {t('certificate.documentTitle')}
             </motion.p>
             <motion.ul 
               className="certificate-features"
               variants={containerVariants}
             >
               {[
-                "Unicum Foundation tinglovchilari universitetning hamkorlik dasturiga kiritilgan.",
-                "CEFR B1 darajasidagi ingliz tili sertifikatiga hamda 21-asr ko'nikmalari bo'yicha maxsus bilimga ega bo'lgan bitiruvchilarimiz O'zDJTUga to'g'ridan-to'g'ri talabalikka qabul qilinadilar.",
-                "Ushbu dastur doirasida 400 nafar o'rin ajratilgan.",
-                "Bu shunchaki kurs emas, bu sizning Xitoy, Rossiya, Belarus va boshqa davlatlardagi nufuzli oliygohlar bilan hamkorlikdagi dasturga kirishingiz uchun qonuniy asosdir."
+                t('certificate.feature1'),
+                t('certificate.feature2'),
+                t('certificate.feature3'),
+                t('certificate.feature4')
               ].map((text, index) => (
                 <motion.li key={index} variants={itemVariants}>
                   <span className="feature-icon">✓</span>
@@ -115,7 +117,7 @@ const Certificate = () => {
               className="certificate-conclusion"
               variants={itemVariants}
             >
-              Eslatma: Talabalikka qabul qilish O'zDJTU tomonidan belgilangan tartibda amalga oshiriladi. Ta'lim jarayoni, kontrakt narxlari va o'qish muddati bilan bog'liq barcha savollar yuzasidan bevosita O'zDJTU qabul komissiyasiga murojaat qilishingizni so'raymiz.
+              {t('certificate.note')}
             </motion.p>
           </motion.div>
         </div>

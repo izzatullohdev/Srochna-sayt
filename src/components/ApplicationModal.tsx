@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiX } from 'react-icons/hi';
 import { useModal } from '../context/ModalContext';
+import { useTranslation } from '../i18n';
 import { addContactToBitrix24, parseFullName } from '../utils/bitrix24';
 import { formatPhoneNumber, cleanPhoneNumber, validatePhoneNumber } from '../utils/phoneUtils';
 import { countries } from '../utils/phoneUtils';
@@ -9,6 +10,7 @@ import './Header.css';
 
 const ApplicationModal = () => {
   const { isModalOpen, closeModal } = useModal();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -24,28 +26,28 @@ const ApplicationModal = () => {
 
   // O'zbekiston viloyatlari ro'yxati
   const regions = [
-    'Andijon viloyati',
-    'Buxoro viloyati',
-    'Farg\'ona viloyati',
-    'Jizzax viloyati',
-    'Qashqadaryo viloyati',
-    'Navoiy viloyati',
-    'Namangan viloyati',
-    'Samarqand viloyati',
-    'Sirdaryo viloyati',
-    'Surxondaryo viloyati',
-    'Toshkent viloyati',
-    'Xorazm viloyati',
-    'Toshkent shahri',
-    'Qoraqalpog\'iston Respublikasi'
+    t('modal.regions.andijon'),
+    t('modal.regions.buxoro'),
+    t('modal.regions.fargona'),
+    t('modal.regions.jizzax'),
+    t('modal.regions.qashqadaryo'),
+    t('modal.regions.navoiy'),
+    t('modal.regions.namangan'),
+    t('modal.regions.samarqand'),
+    t('modal.regions.sirdaryo'),
+    t('modal.regions.surxondaryo'),
+    t('modal.regions.toshkentViloyati'),
+    t('modal.regions.xorazm'),
+    t('modal.regions.toshkentShahri'),
+    t('modal.regions.qoraqalpogiston')
   ];
 
   // Ingliz tili darajalari
   const englishLevels = [
-    'Beginner',
-    'Elementary',
-    'Pre-intermediate',
-    'Intermediate'
+    t('modal.englishLevels.beginner'),
+    t('modal.englishLevels.elementary'),
+    t('modal.englishLevels.preIntermediate'),
+    t('modal.englishLevels.intermediate')
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -82,7 +84,7 @@ const ApplicationModal = () => {
       
       // Telefon raqamini tozalash va tekshirish
       if (!validatePhoneNumber(formData.phone, selectedCountry)) {
-        throw new Error('Iltimos, to\'g\'ri telefon raqamini kiriting');
+        throw new Error(t('modal.form.error'));
       }
       
       const cleanPhone = cleanPhoneNumber(formData.phone, selectedCountry);
@@ -110,14 +112,15 @@ const ApplicationModal = () => {
         LAST_NAME: lastName || '',
         PHONE: phones,
         COMMENTS: `Ota-onaning telefon raqami: ${cleanParentPhone || 'Kiritilmagan'}\nYashash hududi: ${formData.region || 'Kiritilmagan'}\nIngliz tili darajasi: ${formData.englishLevel || 'Kiritilmagan'}\nSertifikat: ${formData.hasCertificate || 'Kiritilmagan'}`,
-        SOURCE_ID: 'WEB'
+        SOURCE_ID: 'WEB',
+       
       };
 
       const response = await addContactToBitrix24(contactData);
 
       if (response.result) {
         // Muvaffaqiyatli yuborildi
-        console.log('✅ Contact Bitrix24\'ga qo\'shildi. ID:', response.result);
+       
         
         // Modal'ni yopish
         closeModal();
@@ -141,7 +144,7 @@ const ApplicationModal = () => {
       console.error('❌ Bitrix24 xatosi:', error);
       const errorMessage = error instanceof Error 
         ? error.message 
-        : 'Xatolik yuz berdi. Iltimos, qayta urinib ko\'ring.';
+        : t('modal.form.errorGeneric');
       setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -203,8 +206,8 @@ const ApplicationModal = () => {
               </button>
               
               <div className="modal-content">
-                <h2 className="modal-title">Ariza topshirish</h2>
-                <p className="modal-subtitle">Ma'lumotlaringizni kiriting va biz siz bilan bog'lanamiz</p>
+                <h2 className="modal-title">{t('modal.title')}</h2>
+                <p className="modal-subtitle">{t('modal.subtitle')}</p>
                 
                 <form onSubmit={handleSubmit} className="application-form">
                   {submitError && (
@@ -223,7 +226,7 @@ const ApplicationModal = () => {
 
                   <div className="form-group">
                     <label htmlFor="fullName" className="form-label">
-                      Ism va familiya
+                      {t('modal.form.fullName')}
                     </label>
                     <input
                       type="text"
@@ -232,7 +235,7 @@ const ApplicationModal = () => {
                       value={formData.fullName}
                       onChange={handleInputChange}
                       className="form-input"
-                      placeholder="Ism va familiyangizni kiriting"
+                      placeholder={t('modal.form.fullNamePlaceholder')}
                       required
                       disabled={isSubmitting}
                     />
@@ -240,7 +243,7 @@ const ApplicationModal = () => {
 
                   <div className="form-group">
                     <label htmlFor="phone" className="form-label">
-                      Telefon raqamingiz
+                      {t('modal.form.phone')}
                     </label>
                     <input
                       type="tel"
@@ -281,7 +284,7 @@ const ApplicationModal = () => {
 
                   <div className="form-group">
                     <label htmlFor="parentPhone" className="form-label">
-                      Ota-onangizni telefon raqami
+                      {t('modal.form.parentPhone')}
                     </label>
                     <input
                       type="tel"
@@ -321,7 +324,7 @@ const ApplicationModal = () => {
 
                   <div className="form-group">
                     <label htmlFor="region" className="form-label">
-                      Yashash hududingiz
+                      {t('modal.form.region')}
                     </label>
                     <select
                       id="region"
@@ -332,7 +335,7 @@ const ApplicationModal = () => {
                       required
                       disabled={isSubmitting}
                     >
-                      <option value="">Viloyatni tanlang</option>
+                      <option value="">{t('modal.form.regionPlaceholder')}</option>
                       {regions.map((region) => (
                         <option key={region} value={region}>
                           {region}
@@ -343,7 +346,7 @@ const ApplicationModal = () => {
 
                   <div className="form-group">
                     <label htmlFor="englishLevel" className="form-label">
-                      Ingliz tilini bilish darajangiz
+                      {t('modal.form.englishLevel')}
                     </label>
                     <select
                       id="englishLevel"
@@ -354,7 +357,7 @@ const ApplicationModal = () => {
                       required
                       disabled={isSubmitting}
                     >
-                      <option value="">Darajani tanlang</option>
+                      <option value="">{t('modal.form.englishLevelPlaceholder')}</option>
                       {englishLevels.map((level) => (
                         <option key={level} value={level}>
                           {level}
@@ -365,32 +368,32 @@ const ApplicationModal = () => {
 
                   <div className="form-group">
                     <label className="form-label">
-                      Chet tili sertifikatingiz bormi?
+                      {t('modal.form.certificate')}
                     </label>
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                         <input
                           type="radio"
                           name="hasCertificate"
-                          value="Bor"
-                          checked={formData.hasCertificate === 'Bor'}
+                          value={t('modal.form.yes')}
+                          checked={formData.hasCertificate === t('modal.form.yes')}
                           onChange={handleInputChange}
                           disabled={isSubmitting}
                           style={{ cursor: 'pointer' }}
                         />
-                        <span>Bor</span>
+                        <span>{t('modal.form.yes')}</span>
                       </label>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                         <input
                           type="radio"
                           name="hasCertificate"
-                          value="Yo'q"
-                          checked={formData.hasCertificate === 'Yo\'q'}
+                          value={t('modal.form.no')}
+                          checked={formData.hasCertificate === t('modal.form.no')}
                           onChange={handleInputChange}
                           disabled={isSubmitting}
                           style={{ cursor: 'pointer' }}
                         />
-                        <span>Yo'q</span>
+                        <span>{t('modal.form.no')}</span>
                       </label>
                     </div>
                   </div>
@@ -417,10 +420,10 @@ const ApplicationModal = () => {
                           animation: 'spin 0.6s linear infinite',
                           display: 'inline-block'
                         }}></span>
-                        Yuborilmoqda...
+                        {t('common.loading')}
                       </span>
                     ) : (
-                      'Yuborish'
+                      t('common.submit')
                     )}
                   </motion.button>
                 </form>
@@ -458,7 +461,7 @@ const ApplicationModal = () => {
             }}
           >
             <span style={{ fontSize: '1.2rem' }}>✅</span>
-            <span>Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.</span>
+            <span>{t('modal.form.success')}</span>
           </motion.div>
         )}
       </AnimatePresence>

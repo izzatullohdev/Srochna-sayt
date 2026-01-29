@@ -4,12 +4,15 @@ import { HiMenu, HiX } from 'react-icons/hi';
 import { AdvancedVideo } from '@cloudinary/react';
 import { cld } from '../config/cloudinary';
 import { useModal } from '../context/ModalContext';
+import { useTranslation } from '../i18n';
+import LanguageSwitcher from './LanguageSwitcher';
 import './Header.css';
 import logoImage from '../assets/logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { openModal } = useModal();
+  const { t } = useTranslation();
 
 
 
@@ -86,23 +89,24 @@ const Header = () => {
 
           <ul className={`navbar-menu ${isMenuOpen ? 'menu-open' : ''}`}>
             <li className="nav-item">
-              <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')}>Biz haqimizda</a>
+              <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')}>{t('header.nav.about')}</a>
             </li>
             <li className="nav-item">
-              <a href="#certificate" onClick={(e) => handleSmoothScroll(e, 'certificate')}>Kafolat</a>
+              <a href="#certificate" onClick={(e) => handleSmoothScroll(e, 'certificate')}>{t('header.nav.certificate')}</a>
             </li>
             <li className="nav-item">
-              <a href="#reviews" onClick={(e) => handleSmoothScroll(e, 'reviews')}>Talabalar fikri</a>
+              <a href="#reviews" onClick={(e) => handleSmoothScroll(e, 'reviews')}>{t('header.nav.reviews')}</a>
             </li>
             <li className="nav-item">
-              <a href="#prices" onClick={(e) => handleSmoothScroll(e, 'prices')}>Narx</a>
+              <a href="#prices" onClick={(e) => handleSmoothScroll(e, 'prices')}>{t('header.nav.prices')}</a>
             </li>
             <li className="nav-item">
-              <a href="#faq" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
+              <a href="#faq" onClick={(e) => handleSmoothScroll(e, 'faq')}>{t('header.nav.faq')}</a>
             </li>
           </ul>
 
           <div className="navbar-right">
+            <LanguageSwitcher />
             <a href="tel:+998781138838" className="phone-contact">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122L9.65 12.2a.678.678 0 0 1-.64-.19l-2.743-2.743a.678.678 0 0 1-.19-.64l.5-2.307a.678.678 0 0 0-.122-.58L3.654 1.328z" fill="currentColor"/>
@@ -131,7 +135,7 @@ const Header = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            UNICUM FOUNDATION
+            {t('header.hero.title')}
           </motion.h1>
           <motion.p 
             className="hero-description"
@@ -139,7 +143,7 @@ const Header = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.1 }}
           >
-            Oʻzbekiston davlat jahon tillari universitetining qo'shma ta'lim dasturlariga imtiyozli asosda imtihonsiz qabul qilinadigan 400 ta talabadan biri bo'lish imkoniyatini qo'lga kiriting!
+            {t('header.hero.description')}
           </motion.p>
           <motion.button 
             className="cta-button"
@@ -150,7 +154,7 @@ const Header = () => {
             whileTap={{ scale: 0.95 }}
             onClick={openModal}
           >
-            Ariza topshirish
+            {t('common.apply')}
           </motion.button>
         </motion.div>
       </motion.div>

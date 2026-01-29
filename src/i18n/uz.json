@@ -1,0 +1,143 @@
+{
+  "common": {
+    "apply": "Ariza topshirish",
+    "close": "Yopish",
+    "submit": "Yuborish",
+    "loading": "Yuborilmoqda...",
+    "select": "Tanlang"
+  },
+  "header": {
+    "nav": {
+      "about": "Biz haqimizda",
+      "certificate": "Kafolat",
+      "reviews": "Talabalar fikri",
+      "prices": "Narx",
+      "faq": "FAQ"
+    },
+    "hero": {
+      "title": "UNICUM FOUNDATION",
+      "description": "Oʻzbekiston davlat jahon tillari universitetining qo'shma ta'lim dasturlariga imtiyozli asosda imtihonsiz qabul qilinadigan 400 ta talabadan biri bo'lish imkoniyatini qo'lga kiriting!"
+    }
+  },
+  "online": {
+    "title": "Unicum Foundation: xalqaro diplomga ega bo'lish imkoniyati!",
+    "intro1": "Biz ingliz tili shunchaki fan emas, balki katta kelajak kaliti ekanligiga ishonamiz. Unicum Foundation — bu o'z oldiga yuksak maqsad qo'ygan 11-sinf o'quvchilari uchun maxsus loyiha.",
+    "intro2": "Bizning vazifamiz aniq: sizni qisqa vaqt ichida CEFR B1 va undan yuqori darajaga olib chiqish. Ammo bu hali hammasi emas.",
+    "intro3": "Dasturni muvaffaqiyatli tugatgan bitiruvchilarimizning 400 tasi maxsus sertifikatga ega bo'ladilar. Ushbu sertifikat sizga O'zbekiston davlat jahon tillari universiteti (O'zDJTU) ning Xitoy, Rossiya, Belarus va boshqa davlatlarning nufuzli universitetlari bilan tashkil etgan qo'shma ta'lim dasturlariga imtihonsiz imtiyoz asosida qabul qilinish imkonini beradi.",
+    "conclusion": "Biz bilan talaba bo'lish imkoniyatingizni kafolatlang!"
+  },
+  "about": {
+    "title": "O'zDJTU va Unicum Foundation: Rasmiy hamkorlik va ishonch",
+    "description": "\"Xalqaro standartlarda va chet elda o'qishni xohlayotgan yoshlarga ushbu loyihada qatnashishni shaxsan tavsiya etaman\" — O'zbekiston davlat jahon tillari universiteti \"Qo'shma ta'lim dasturlarini muvofiqlashtirish\" bo'limi boshlig'i Rashidova Feruza Musayevna.",
+    "benefitsTitle": "Ushbu kursda ishtirok etish sizga nima beradi:",
+    "benefit1": "Oson qabul: DTM imtihonlarisiz, faqat til sertifikati va 21-asr ko'nikmalari orqali to'g'ridan-to'g'ri talabalikka qabul qilinish kafolati",
+    "benefit2": "Xalqaro imkoniyat: 2 yil O'zbekistonda + 2 yil chet elda o'qish",
+    "benefit3": "Bir vaqtning o'zida ham O'zbekiston, ham xorijiy universitet diplomini qo'lga kiritish"
+  },
+  "certificate": {
+    "title": "So'zda emas, hujjatda:",
+    "subtitle": "O'zDJTU rektorining rasmiy kafolati",
+    "intro": "Biz va'da bermaymiz, biz kafolatlaymiz. Yon tomonda ko'rib turganingiz — O'zbekiston davlat jahon tillari universiteti rektori I. To'xtasinov tomonidan imzolangan rasmiy kafolat xatidir.",
+    "documentTitle": "Ushbu hujjatga ko'ra:",
+    "feature1": "Unicum Foundation tinglovchilari universitetning hamkorlik dasturiga kiritilgan.",
+    "feature2": "CEFR B1 darajasidagi ingliz tili sertifikatiga hamda 21-asr ko'nikmalari bo'yicha maxsus bilimga ega bo'lgan bitiruvchilarimiz O'zDJTUga to'g'ridan-to'g'ri talabalikka qabul qilinadilar.",
+    "feature3": "Ushbu dastur doirasida 400 nafar o'rin ajratilgan.",
+    "feature4": "Bu shunchaki kurs emas, bu sizning Xitoy, Rossiya, Belarus va boshqa davlatlardagi nufuzli oliygohlar bilan hamkorlikdagi dasturga kirishingiz uchun qonuniy asosdir.",
+    "note": "Eslatma: Talabalikka qabul qilish O'zDJTU tomonidan belgilangan tartibda amalga oshiriladi. Ta'lim jarayoni, kontrakt narxlari va o'qish muddati bilan bog'liq barcha savollar yuzasidan bevosita O'zDJTU qabul komissiyasiga murojaat qilishingizni so'raymiz."
+  },
+  "students": {
+    "title": "Talabalar fikri"
+  },
+  "price": {
+    "title": "Oliy ta'limga kafolatlangan investitsiya",
+    "intro": "Biz shunchaki ingliz tilini o'rgatmaymiz, biz abituriyentni talaba bo'lishga tayyorlaymiz. To'lov summasiga nafaqat muvaffaqiyatli o'qish uchun barcha zaruriy narsalar, balki zamonaviy dunyo talablariga to'liq javob beradigan ko'nikmalar ham kiritilgan:",
+    "feature1": "To'liq o'quv kursi: 0 dan B1 darajasigacha bo'lgan intensiv dastur.",
+    "feature2": "AI savodxonligi: O'qish va ishda sun'iy intellekt (ChatGPT, Google Gemini va h.k.) dan samarali foydalanishni o'rgatamiz.",
+    "feature3": "21-asr ko'nikmalari: Tanqidiy fikrlash, muammo yechish va liderlik qobiliyatlarini shakllantirish.",
+    "feature4": "Professional ustozlar: Yuqori darajaga ega va abituriyentlar bilan ishlash tajribasiga ega mutaxassislar.",
+    "feature5": "O'quv materiallari: Barcha kitoblar, qo'llanmalar va audio-video materiallar bepul beriladi.",
+    "feature6": "Doimiy nazorat: Ota-onalar uchun o'zlashtirish ko'rsatkichlari bo'yicha hisobotlar.",
+    "feature7": "Yakuniy imtihon va sertifikat: O'zDJTU hamkor dasturlariga imtiyozli kirish huquqini beruvchi hujjat.",
+    "plan": {
+      "title": "Individual English",
+      "price": "7 200 000",
+      "currency": "UZS",
+      "description": "To'lovni birdaniga yoki bo'lib to'lash orqali amalga oshiring:",
+      "feature1": "Qulay bo'lib to'lash: 3 oyga: oyiga 2 400 000 so'mdan, 6 oyga: oyiga 1 200 000 so'mdan",
+      "feature2": "Narxga nimalar kiradi?",
+      "feature3": "Ingliz tili (B1+ daraja)",
+      "feature4": "AI va Soft Skills darslari",
+      "feature5": "Barcha o'quv qo'llanmalar",
+      "feature6": "Mock exams (Sinov imtihonlari)",
+      "feature7": "O'zDJTU qo'shma dasturiga yo'llanma (Sertifikat)",
+      "button": "Kursga yozilish"
+    }
+  },
+  "faq": {
+    "title": "FAQ",
+    "q1": "Siz beradigan sertifikat bilan qaysi universitetlarga imtihonsiz kirish mumkin?",
+    "a1": "Ushbu sertifikat bilan O'zDJTUning Xitoy Xalq Respublikasi, Rossiya Federatsiyasi hamda Belarus Respublikasi oliy ta'lim muassasalari bilan tashkil etgan qo'shma ta'lim dasturlariga imtiyozli asosda kirishingiz mumkin.",
+    "q2": "O'qishga kirishga 100% kafolat berasizlarmi?",
+    "a2": "Kafolat shundan iboratki, CEFR B1 darajasidagi ingliz tili sertifikatiga ega bo'lgan 400 nafar o'quvchilarimiz to'g'ridan-to'g'ri talabalikka qabul qilinadi.",
+    "q3": "Ingliz tilini umuman bilmayman. Dasturda qatnasha olamanmi?",
+    "a3": "Yo'q, dastur ingliz tili bo'yicha boshlang'ich va asosiy bilimlarga ega bo'lgan o'quvchilarga mo'ljallangan.",
+    "q4": "Darslar onlayn bo'ladimi yoki oflayn?",
+    "a4": "Ta'lim to'liq masofaviy (onlayn) shaklda bo'lib, siz smartfon yoki kompyuter orqali o'zingizga qulay joyda o'qishingiz mumkin.",
+    "q5": "Kurs narxini bo'lib to'lasam bo'ladimi?",
+    "a5": "Ha, to'lovni to'liq (100%) amalga oshirish yoki summani 3 ga va 6 ga bo'lib to'lash imkoniyatlari mavjud.",
+    "q6": "Darslardan tashqari AI (Sun'iy intellekt)ni o'rganish majburiymi?",
+    "a6": "Bu majburiyat emas, balki imkoniyatdir. Dastur davomida sizga o'qish va kelajakdagi ish jarayonlarida kerak bo'ladigan Sun'iy intellekt vositalari bilan ishlash ko'nikmalari o'rgatiladi.",
+    "q7": "Agar kurs oxirida B1 darajasini ololmasam, nima bo'ladi?",
+    "a7": "Kurs oxirida CEFR B1 sertifikatini olomasangiz, to'lagan pulingiz sizga 100% miqdorda qaytariladi.",
+    "q8": "Darslarni kimlar o'tadi? O'qituvchilarning malakasi qanaqa?",
+    "a8": "Darslarni xalqaro toifadagi sertifikatlarga ega bo'lgan yuqori malakali mutaxassislar olib boradilar.",
+    "q9": "Bu dastur O'zDJTUning o'ziga kirishga yordam beradimi yoki faqat qo'shma dasturlargami?",
+    "a9": "Ushbu dastur va imtiyozlar faqat O'zDJTUning xorijiy hamkorlar bilan tashkil etgan Qo'shma ta'lim dasturlariga qabul jarayoni uchun amal qiladi."
+  },
+  "footer": {
+    "contactTitle": "Biz bilan bog'laning",
+    "copyright": "© 2024-2026 — Barcha huquqlar himoyalangan"
+  },
+  "modal": {
+    "title": "Ariza topshirish",
+    "subtitle": "Ma'lumotlaringizni kiriting va biz siz bilan bog'lanamiz",
+    "form": {
+      "fullName": "Ism va familiya",
+      "fullNamePlaceholder": "Ism va familiyangizni kiriting",
+      "phone": "Telefon raqamingiz",
+      "parentPhone": "Ota-onangizni telefon raqami",
+      "region": "Yashash hududingiz",
+      "regionPlaceholder": "Viloyatni tanlang",
+      "englishLevel": "Ingliz tilini bilish darajangiz",
+      "englishLevelPlaceholder": "Darajani tanlang",
+      "certificate": "Chet tili sertifikatingiz bormi?",
+      "yes": "Bor",
+      "no": "Yo'q",
+      "error": "Iltimos, to'g'ri telefon raqamini kiriting",
+      "errorGeneric": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+      "success": "Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz."
+    },
+    "regions": {
+      "andijon": "Andijon viloyati",
+      "buxoro": "Buxoro viloyati",
+      "fargona": "Farg'ona viloyati",
+      "jizzax": "Jizzax viloyati",
+      "qashqadaryo": "Qashqadaryo viloyati",
+      "navoiy": "Navoiy viloyati",
+      "namangan": "Namangan viloyati",
+      "samarqand": "Samarqand viloyati",
+      "sirdaryo": "Sirdaryo viloyati",
+      "surxondaryo": "Surxondaryo viloyati",
+      "toshkentViloyati": "Toshkent viloyati",
+      "xorazm": "Xorazm viloyati",
+      "toshkentShahri": "Toshkent shahri",
+      "qoraqalpogiston": "Qoraqalpog'iston Respublikasi"
+    },
+    "englishLevels": {
+      "beginner": "Beginner",
+      "elementary": "Elementary",
+      "preIntermediate": "Pre-intermediate",
+      "intermediate": "Intermediate"
+    }
+  }
+}

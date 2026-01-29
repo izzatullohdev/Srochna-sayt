@@ -1,9 +1,11 @@
 import { useModal } from '../context/ModalContext';
+import { useTranslation } from '../i18n';
 import './Footer.css';
 import logoImage from '../assets/logo.png';
 
 const Footer = () => {
   const { openModal } = useModal();
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -77,14 +79,14 @@ const Footer = () => {
             </div>
 
             <div className="footer-copyright">
-              <p>© 2024-2026 — Barcha huquqlar himoyalangan</p>
+              <p>{t('footer.copyright')}</p>
             </div>
           </div>
 
           {/* Right Section - Contact Info */}
           <div className="footer-right">
             <div className="footer-contact-card">
-              <h4 className="footer-contact-title">Biz bilan bog'laning</h4>
+              <h4 className="footer-contact-title">{t('footer.contactTitle')}</h4>
               <div className="footer-contact-info">
                 <div className="contact-item">
                   <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
@@ -115,7 +117,7 @@ const Footer = () => {
                     openModal();
                   }}
                 >
-                  Ariza topshirish
+                  {t('common.apply')}
                 </a>
               </div>
             </div>

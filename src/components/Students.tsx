@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
+import { useTranslation } from '../i18n';
 import './Students.css';
 
 const Students = () => {
+  const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   // YouTube URL'dan video ID ni olish funksiyasi
@@ -163,7 +165,7 @@ const Students = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Talabalar fikri
+            {t('students.title')}
           </motion.h2>
         </motion.div>
         <motion.div 

@@ -1,56 +1,58 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiPlus, HiMinus } from 'react-icons/hi';
+import { useTranslation } from '../i18n';
 import './FAQ.css';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { t } = useTranslation();
 
   const faqItems = [
     {
       id: 1,
-      question: "Siz beradigan sertifikat bilan qaysi universitetlarga imtihonsiz kirish mumkin?",
-      answer: "Ushbu sertifikat bilan O'zDJTUning Xitoy Xalq Respublikasi, Rossiya Federatsiyasi hamda Belarus Respublikasi oliy ta'lim muassasalari bilan tashkil etgan qo'shma ta'lim dasturlariga imtiyozli asosda kirishingiz mumkin."
+      question: t('faq.q1'),
+      answer: t('faq.a1')
     },
     {
       id: 2,
-      question: "O'qishga kirishga 100% kafolat berasizlarmi?",
-      answer: "Kafolat shundan iboratki, CEFR B1 darajasidagi ingliz tili sertifikatiga ega bo'lgan 400 nafar o'quvchilarimiz to'g'ridan-to'g'ri talabalikka qabul qilinadi."
+      question: t('faq.q2'),
+      answer: t('faq.a2')
     },
     {
       id: 3,
-      question: "Ingliz tilini umuman bilmayman. Dasturda qatnasha olamanmi?",
-      answer: "Yo'q, dastur ingliz tili bo'yicha boshlang'ich va asosiy bilimlarga ega bo'lgan o'quvchilarga mo'ljallangan."
+      question: t('faq.q3'),
+      answer: t('faq.a3')
     },
     {
       id: 4,
-      question: "Darslar onlayn bo'ladimi yoki oflayn?",
-      answer: "Ta'lim to'liq masofaviy (onlayn) shaklda bo'lib, siz smartfon yoki kompyuter orqali o'zingizga qulay joyda o'qishingiz mumkin."
+      question: t('faq.q4'),
+      answer: t('faq.a4')
     },
     {
       id: 5,
-      question: "Kurs narxini bo'lib to'lasam bo'ladimi?",
-      answer: "Ha, to'lovni to'liq (100%) amalga oshirish yoki summani 3 ga va 6 ga bo'lib to'lash imkoniyatlari mavjud."
+      question: t('faq.q5'),
+      answer: t('faq.a5')
     },
     {
       id: 6,
-      question: "Darslardan tashqari AI (Sun'iy intellekt)ni o'rganish majburiymi?",
-      answer: "Bu majburiyat emas, balki imkoniyatdir. Dastur davomida sizga o'qish va kelajakdagi ish jarayonlarida kerak bo'ladigan Sun'iy intellekt vositalari bilan ishlash ko'nikmalari o'rgatiladi."
+      question: t('faq.q6'),
+      answer: t('faq.a6')
     },
     {
       id: 7,
-      question: "Agar kurs oxirida B1 darajasini ololmasam, nima bo'ladi?",
-      answer: "Kurs oxirida CEFR B1 sertifikatini olomasangiz, to'lagan pulingiz sizga 100% miqdorda qaytariladi."
+      question: t('faq.q7'),
+      answer: t('faq.a7')
     },
     {
       id: 8,
-      question: "Darslarni kimlar o'tadi? O'qituvchilarning malakasi qanaqa?",
-      answer: "Darslarni xalqaro toifadagi sertifikatlarga ega bo'lgan yuqori malakali mutaxassislar olib boradilar."
+      question: t('faq.q8'),
+      answer: t('faq.a8')
     },
     {
       id: 9,
-      question: "Bu dastur O'zDJTUning o'ziga kirishga yordam beradimi yoki faqat qo'shma dasturlargami?",
-      answer: "Ushbu dastur va imtiyozlar faqat O'zDJTUning xorijiy hamkorlar bilan tashkil etgan Qo'shma ta'lim dasturlariga qabul jarayoni uchun amal qiladi."
+      question: t('faq.q9'),
+      answer: t('faq.a9')
     }
   ];
 
@@ -143,7 +145,7 @@ const FAQ = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          FAQ
+          {t('faq.title')}
         </motion.h2>
         <motion.div 
           className="faq-items"
