@@ -178,10 +178,9 @@ export const addDealToBitrix24 = async (
   const webhookUrl = 'https://crm.usatportal.uz/rest/76/st53k7s56ybsf289/crm.deal.add.json';
 
   try {
-    const fields = {
+    const fields: Record<string, unknown> = {
       TITLE: dealData.TITLE,
       CONTACT_ID: dealData.CONTACT_ID,
-      COMMENTS: dealData.COMMENTS || '',
       SOURCE_ID: dealData.SOURCE_ID || 'WEB',
       ...(dealData.CATEGORY_ID !== undefined ? { CATEGORY_ID: dealData.CATEGORY_ID } : {}),
       ...(dealData.UF_CRM_1769674454 !== undefined ? { UF_CRM_1769674454: dealData.UF_CRM_1769674454 } : {}),
@@ -192,12 +191,13 @@ export const addDealToBitrix24 = async (
       ...(dealData.UF_CRM_1769753709 !== undefined ? { UF_CRM_1769753709: dealData.UF_CRM_1769753709 } : {}),
     };
 
+    if (dealData.COMMENTS) {
+      fields.COMMENTS = dealData.COMMENTS;
+    }
+
     const requestBody = {
       fields: fields,
     };
-
-    console.log('Bitrix24 Deal Request URL:', webhookUrl);
-    console.log('Bitrix24 Deal Request Body:', JSON.stringify(requestBody, null, 2));
 
     const response = await fetch(webhookUrl, {
       method: 'POST',

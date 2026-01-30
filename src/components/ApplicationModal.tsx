@@ -123,7 +123,9 @@ const ApplicationModal = () => {
         };
 
         const response = await addContactToBitrix24(contactData);
-        console.log('Contact add response:', response);
+        if (import.meta.env.DEV) {
+          console.log('Contact add response:', response);
+        }
 
         if (!response.result) {
           throw new Error('Contact ID olinmadi');
@@ -162,22 +164,6 @@ const ApplicationModal = () => {
       
       const cleanPhone = cleanPhoneNumber(formData.phone, selectedCountry);
       const cleanParentPhone = formData.parentPhone ? cleanPhoneNumber(formData.parentPhone, selectedCountry) : '';
-
-      // Telefon raqamlari ro'yxatini yaratish
-      const phones = [
-        {
-          VALUE: cleanPhone,
-          VALUE_TYPE: 'WORK'
-        }
-      ];
-
-      // Agar ota-onaning telefon raqami bo'lsa, qo'shamiz
-      if (cleanParentPhone) {
-        phones.push({
-          VALUE: cleanParentPhone,
-          VALUE_TYPE: 'HOME'
-        });
-      }
 
       // Sertifikat qiymatini "bor/yoq" formatiga o'tkazish
       const certificateValue = formData.hasCertificate === t('modal.form.yes') ? 'bor' : 
@@ -233,6 +219,15 @@ const ApplicationModal = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    if (currentStep === 1) {
+      e.preventDefault();
+      handleNextStep();
+      return;
+    }
+    handleSubmit(e);
   };
 
   const handleClose = () => {
@@ -295,7 +290,7 @@ const ApplicationModal = () => {
                 <h2 className="modal-title">{t('modal.title')}</h2>
                 <p className="modal-subtitle">{t('modal.subtitle')}</p>
                 
-                <form onSubmit={handleSubmit} className="application-form">
+                <form onSubmit={handleFormSubmit} className="application-form">
                   {submitError && (
                     <div className="form-error" style={{
                       padding: '0.75rem',
