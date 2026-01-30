@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json']
+  },
+  preview: {
+    allowedHosts: ['unicum.uz']
   }
 })
