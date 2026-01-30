@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion';
 import { HiFire } from 'react-icons/hi';
-import { useModal } from '../context/ModalContext';
 import { useTranslation } from '../i18n';
 import './Price.css';
 
 const Price = () => {
-  const { openModal } = useModal();
   const { t } = useTranslation();
   const planFeatures = [
     t('price.plan.feature1'),
@@ -205,14 +203,13 @@ const Price = () => {
                   </ul>
                 </div>
                 <div className="price-card-footer">
-                  <motion.button 
+                  <motion.a
+                    href="https://b24-zouffe.bitrix24.site/crm_form_pfddk"
                     className="price-button"
-                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={openModal}
                   >
                     {plan.buttonText}
-                  </motion.button>
+                  </motion.a>
                 </div>
               </motion.div>
             ))}

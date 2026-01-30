@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { AdvancedVideo } from '@cloudinary/react';
 import { cld } from '../config/cloudinary';
-import { useModal } from '../context/ModalContext';
 import { useTranslation } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 import './Header.css';
@@ -12,7 +11,6 @@ import logoImage from '../assets/logo.png';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { openModal } = useModal();
   const { t } = useTranslation();
 
   // Scroll event listener
@@ -157,17 +155,17 @@ const Header = () => {
           >
             {t('header.hero.description')}
           </motion.p>
-          <motion.button 
+          <motion.a
+            href="https://b24-zouffe.bitrix24.site/crm_form_pfddk"
             className="cta-button"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 1.3 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={openModal}
           >
             {t('common.apply')}
-          </motion.button>
+          </motion.a>
         </motion.div>
       </motion.div>
 

@@ -323,7 +323,9 @@
 .cta-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  width: 200px;
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -338,6 +340,8 @@
 
 .cta-button:hover {
   transform: translateY(-2px);
+  color: #fff;
+  background: linear-gradient(135deg, #ff7a00, #ff9f1a);
   box-shadow: 0 6px 20px rgba(255, 165, 0, 0.6);
 }
 

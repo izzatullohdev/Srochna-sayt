@@ -64,66 +64,59 @@ const Students = () => {
     return url;
   };
 
-  // YouTube video'dan thumbnail URL olish funksiyasi
-  const getYouTubeThumbnail = (url: string, quality: 'maxresdefault' | 'hqdefault' | 'mqdefault' | 'sddefault' = 'maxresdefault'): string => {
-    const videoId = getYouTubeVideoId(url);
-    
-    if (videoId) {
-      return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
-    }
-    
-    // Agar video ID topilmasa, default rasm qaytaradi
-    return 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop';
-  };
+
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
+  const getCloudinaryImage = (publicId: string) =>
+    `https://res.cloudinary.com/${cloudName}/image/upload/w_400,h_600,c_fill,q_auto,f_auto/${publicId}`;
 
   const testimonials = [
     {
       id: 1,
       name: 'Boborajabova Nozanin',
       specialization: "Xorijiy til va adabiyot yo'nalishi talabasi",
-      image: getYouTubeThumbnail('https://youtube.com/shorts/ZsMRk3n-_6g', 'maxresdefault'),
+      image: getCloudinaryImage('hgj1if'),
       videoUrl: 'https://youtube.com/shorts/ZsMRk3n-_6g',
     },
     {
       id: 2,
       name: 'Jalilov Abdulbosit',
       specialization: "Xorijiy til va adabiyot yo'nalishi talabasi",
-      image: getYouTubeThumbnail('https://youtube.com/shorts/BnQxNp49sEY', 'maxresdefault'),
+      image: getCloudinaryImage('Unicom_1-3_ptwpd2'),
       videoUrl: 'https://youtube.com/shorts/BnQxNp49sEY',
     },
     {
       id: 3,
       name: 'Saydaliyeva Mubina',
       specialization: "Turizm va mehmondo'stlik yo'nalishi talabasi",
-      image: getYouTubeThumbnail('https://youtube.com/shorts/bDBGtCOeUMQ', 'maxresdefault'),
+      image: getCloudinaryImage('Unicom_1-5_eyrtoj'),
       videoUrl: 'https://youtube.com/shorts/bDBGtCOeUMQ',
     },
     {
       id: 4,
       name: 'Soatova Hilola',
       specialization: "Iqtisodiyot yo'nalishi talabasi",
-      image: getYouTubeThumbnail('https://youtube.com/shorts/3qzpAiJoOSo', 'maxresdefault'),
+      image: getCloudinaryImage('Unicom_1-8_d9rvkb'),
       videoUrl: 'https://youtube.com/shorts/3qzpAiJoOSo',
     },
     {
       id: 5,
       name: '',
       specialization: '',
-      image: getYouTubeThumbnail('https://youtube.com/shorts/F241rIoGxLY', 'maxresdefault'),
+      image: getCloudinaryImage('Unicom_1-7_yplgrq'),
       videoUrl: 'https://youtube.com/shorts/F241rIoGxLY',
     },
     {
       id: 6,
       name: '',
       specialization: '',
-      image: getYouTubeThumbnail('https://youtube.com/shorts/dY-Li9hB-2c', 'maxresdefault'),
+      image: getCloudinaryImage('Unicom_1-4_v6tqvk'),
       videoUrl: 'https://youtube.com/shorts/dY-Li9hB-2c',
     },
     {
       id: 7,
       name: '',
       specialization: '',
-      image: getYouTubeThumbnail('https://youtube.com/shorts/C2zcv09L6b8', 'maxresdefault'),
+      image: getCloudinaryImage('Unicom_1-13_wdaulk'),
       videoUrl: 'https://youtube.com/shorts/C2zcv09L6b8',
     },
   ];
@@ -198,7 +191,7 @@ const Students = () => {
         >
           <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={20}
+            spaceBetween={10}
             slidesPerView={1.5}
             autoplay={{
               delay: 3000,
@@ -212,15 +205,15 @@ const Students = () => {
             breakpoints={{
               320: {
                 slidesPerView: 1.5,
-                spaceBetween: 10,
+                spaceBetween: 5,
               },
               768: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 5,
               },
               1280: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 5,
               },
             }}
             className="students-swiper"
@@ -241,12 +234,7 @@ const Students = () => {
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.3 }}
                      
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        console.error('❌ YouTube thumbnail yuklanmadi:', testimonial.name, testimonial.image);
-                        // Fallback rasm
-                        target.src = 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=500&fit=crop';
-                      }}
+              
                     />
                     <div className="play-button-overlay">
                       <motion.div 

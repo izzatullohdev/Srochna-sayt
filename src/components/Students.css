@@ -43,7 +43,7 @@
 
 .testimonial-card {
   width: 100%;
-  max-width: 280px; /* Kenglik kamaytirildi - 2 ta element ko'rinishi uchun */
+  /* max-width: 300px; Kenglik kamaytirildi - 2 ta element ko'rinishi uchun */
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
@@ -185,10 +185,14 @@
 }
 
 .students-swiper :global(.swiper-pagination-bullet-active) {
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background: #ff8c00;
   width: 30px;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(255, 140, 0, 0.4);
+}
+
+.students-swiper :global(.swiper-pagination-bullet-active-main) {
+  background: #ff8c00;
 }
 
 .students-swiper :global(.swiper-pagination-bullet:hover) {

@@ -1,10 +1,8 @@
-import { useModal } from '../context/ModalContext';
 import { useTranslation } from '../i18n';
 import './Footer.css';
 import logoImage from '../assets/logo.png';
 
 const Footer = () => {
-  const { openModal } = useModal();
   const { t } = useTranslation();
   return (
     <footer className="footer">
@@ -110,12 +108,8 @@ const Footer = () => {
               </div>
               <div className="footer-cta">
                 <a 
-                  href="#apply" 
+                  href="https://b24-zouffe.bitrix24.site/crm_form_pfddk"
                   className="footer-cta-button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    openModal();
-                  }}
                 >
                   {t('common.apply')}
                 </a>
