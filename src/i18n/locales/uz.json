@@ -3,6 +3,7 @@
     "apply": "Ariza topshirish",
     "close": "Yopish",
     "submit": "Yuborish",
+    "next": "Keyingi",
     "loading": "Yuborilmoqda...",
     "select": "Tanlang"
   },
@@ -101,6 +102,10 @@
   "modal": {
     "title": "Ariza topshirish",
     "subtitle": "Ma'lumotlaringizni kiriting va biz siz bilan bog'lanamiz",
+    "steps": {
+      "location": "Lokatsiya",
+      "cargo": "Yuk"
+    },
     "form": {
       "fullName": "Ism va familiya",
       "fullNamePlaceholder": "Ism va familiyangizni kiriting",

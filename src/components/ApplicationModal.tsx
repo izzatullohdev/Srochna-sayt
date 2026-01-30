@@ -3,17 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiX } from 'react-icons/hi';
 import { useModal } from '../context/ModalContext';
 import { useTranslation } from '../i18n';
-import { addContactToBitrix24, parseFullName } from '../utils/bitrix24';
+import { addContactToBitrix24, addDealToBitrix24, parseFullName } from '../utils/bitrix24';
 import { formatPhoneNumber, cleanPhoneNumber, validatePhoneNumber } from '../utils/phoneUtils';
 import { countries } from '../utils/phoneUtils';
 import './Header.css';
 
 const ApplicationModal = () => {
   const { isModalOpen, closeModal } = useModal();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [contactId, setContactId] = useState<number | null>(null);
   const selectedCountry = countries[0]; // O'zbekiston - default davlat
   const [formData, setFormData] = useState({
     fullName: '',
@@ -50,6 +52,18 @@ const ApplicationModal = () => {
     t('modal.englishLevels.intermediate')
   ];
 
+  const getLabel = (key: string, fallback: string) => {
+    const value = t(key);
+    return value === key ? fallback : value;
+  };
+
+  const nextLabel = getLabel(
+    'common.next',
+    language === 'ru' ? 'Далее' : 'Keyingi'
+  );
+  const stepLocationLabel = language === 'ru' ? '1-й шаг' : '1-qadam';
+  const stepCargoLabel = language === 'ru' ? '2-й шаг' : '2-qadam';
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
@@ -72,6 +86,65 @@ const ApplicationModal = () => {
     }
   };
 
+  const handleNextStep = () => {
+    setSubmitError(null);
+    setSubmitSuccess(false);
+
+    if (!formData.fullName.trim()) {
+      setSubmitError(t('modal.form.errorGeneric'));
+      return;
+    }
+
+    if (!validatePhoneNumber(formData.phone, selectedCountry)) {
+      setSubmitError(t('modal.form.error'));
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const submitContact = async () => {
+      try {
+        const { name, lastName } = parseFullName(formData.fullName);
+        const cleanPhone = cleanPhoneNumber(formData.phone, selectedCountry);
+
+        const phones = [
+          {
+            VALUE: cleanPhone,
+            VALUE_TYPE: 'WORK'
+          }
+        ];
+
+        const contactData = {
+          NAME: name || formData.fullName,
+          LAST_NAME: lastName || '',
+          PHONE: phones,
+          SOURCE_ID: 'WEB',
+          CATEGORY_ID: 22,
+        };
+
+        const response = await addContactToBitrix24(contactData);
+        console.log('Contact add response:', response);
+
+        if (!response.result) {
+          throw new Error('Contact ID olinmadi');
+        }
+
+        setContactId(response.result);
+        setCurrentStep(2);
+      } catch (error) {
+        console.error('❌ Contact add xatosi:', error);
+        const errorMessage = error instanceof Error
+          ? error.message
+          : t('modal.form.errorGeneric');
+        setSubmitError(errorMessage);
+      } finally {
+        setIsSubmitting(false);
+      }
+    };
+
+    submitContact();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -80,7 +153,7 @@ const ApplicationModal = () => {
 
     try {
       // Ism va familiyani ajratish
-      const { name, lastName } = parseFullName(formData.fullName);
+      const { name } = parseFullName(formData.fullName);
       
       // Telefon raqamini tozalash va tekshirish
       if (!validatePhoneNumber(formData.phone, selectedCountry)) {
@@ -110,45 +183,45 @@ const ApplicationModal = () => {
       const certificateValue = formData.hasCertificate === t('modal.form.yes') ? 'bor' : 
                                formData.hasCertificate === t('modal.form.no') ? 'yoq' : '';
 
-      // Bitrix24'ga contact qo'shish - aniq format
-      const contactData = {
-        NAME: name || formData.fullName,
-        LAST_NAME: lastName || '',
-        PHONE: phones,
-        COMMENTS: `Ota-onaning telefon raqami: ${cleanParentPhone || 'Kiritilmagan'}\nYashash hududi: ${formData.region || 'Kiritilmagan'}\nIngliz tili darajasi: ${formData.englishLevel || 'Kiritilmagan'}\nSertifikat: ${formData.hasCertificate || 'Kiritilmagan'}`,
+      if (!contactId) {
+        throw new Error('Contact ID topilmadi. Avval 1-qadamni bajaring.');
+      }
+
+      // 2) Bitrix24'ga deal qo'shish (contact_id bilan)
+      const dealData = {
+        TITLE: `Zayavka - ${name || formData.fullName}`,
+        CONTACT_ID: contactId,
         SOURCE_ID: 'WEB',
-        // Custom fields
-        UF_CRM_1769674454: cleanParentPhone || '', // Ota-onasi telefon raqami (chislo)
-        UF_CRM_1769674491: formData.region || '', // Yashash hududi (adres)
-        UF_CRM_1769674557: formData.englishLevel || '', // Ingliz tili darajasi (Stroka)
-        UF_CRM_1753422572: certificateValue, // Sertifikat (spisok "bor/yoq")
-        CATEGORY_ID: 22, // Category ID
+        CATEGORY_ID: 22,
+        UF_CRM_1769674454: cleanParentPhone || '',
+        UF_CRM_1769674491: formData.region || '',
+        UF_CRM_1769674557: formData.englishLevel || '',
+        UF_CRM_1769750196: certificateValue,
       };
 
-      const response = await addContactToBitrix24(contactData);
+      const dealResponse = await addDealToBitrix24(dealData);
 
-      if (response.result) {
-        // Muvaffaqiyatli yuborildi
-       
-        
-        // Modal'ni yopish
-        closeModal();
-        
-        // Muvaffaqiyat xabarini ko'rsatish
-        setSubmitSuccess(true);
-        
-        // Formani tozalash
-        setFormData({ 
-          fullName: '', 
-          phone: '', 
-          parentPhone: '', 
-          region: '', 
-          englishLevel: '', 
-          hasCertificate: '' 
-        });
-      } else {
-        throw new Error('Javob olinmadi');
+      if (!dealResponse.result) {
+        throw new Error('Deal ID olinmadi');
       }
+
+      // Muvaffaqiyatli yuborildi
+      closeModal();
+
+      // Muvaffaqiyat xabarini ko'rsatish
+      setSubmitSuccess(true);
+
+      // Formani tozalash
+      setFormData({ 
+        fullName: '', 
+        phone: '', 
+        parentPhone: '', 
+        region: '', 
+        englishLevel: '', 
+        hasCertificate: '' 
+      });
+      setCurrentStep(1);
+      setContactId(null);
     } catch (error) {
       console.error('❌ Bitrix24 xatosi:', error);
       const errorMessage = error instanceof Error 
@@ -173,6 +246,8 @@ const ApplicationModal = () => {
     setSubmitError(null);
     setSubmitSuccess(false);
     setIsSubmitting(false);
+    setCurrentStep(1);
+    setContactId(null);
   };
 
   // Muvaffaqiyat xabarini 5 soniyadan keyin yopish
@@ -233,209 +308,245 @@ const ApplicationModal = () => {
                     </div>
                   )}
 
-                  <div className="form-group">
-                    <label htmlFor="fullName" className="form-label">
-                      {t('modal.form.fullName')}
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      placeholder={t('modal.form.fullNamePlaceholder')}
-                      required
-                      disabled={isSubmitting}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="phone" className="form-label">
-                      {t('modal.form.phone')}
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      onKeyDown={(e) => {
-                        const allowedKeys = [
-                          'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 
-                          'ArrowUp', 'ArrowDown', 'Tab', 'Escape', 'Enter'
-                        ];
-                        const isNumber = /[0-9]/.test(e.key);
-                        const isAllowedKey = allowedKeys.includes(e.key);
-                        
-                        if (!isNumber && !isAllowedKey) {
-                          e.preventDefault();
-                        }
-                      }}
-                      onPaste={(e) => {
-                        e.preventDefault();
-                        const pastedText = e.clipboardData.getData('text');
-                        const digits = pastedText.replace(/\D/g, '');
-                        const formatted = formatPhoneNumber(digits, selectedCountry);
-                        setFormData(prev => ({
-                          ...prev,
-                          phone: formatted
-                        }));
-                      }}
-                      className="form-input"
-                      placeholder={selectedCountry.placeholder}
-                      required
-                      disabled={isSubmitting}
-                      inputMode="numeric"
-                      maxLength={20}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="parentPhone" className="form-label">
-                      {t('modal.form.parentPhone')}
-                    </label>
-                    <input
-                      type="tel"
-                      id="parentPhone"
-                      name="parentPhone"
-                      value={formData.parentPhone}
-                      onChange={handleInputChange}
-                      onKeyDown={(e) => {
-                        const allowedKeys = [
-                          'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 
-                          'ArrowUp', 'ArrowDown', 'Tab', 'Escape', 'Enter'
-                        ];
-                        const isNumber = /[0-9]/.test(e.key);
-                        const isAllowedKey = allowedKeys.includes(e.key);
-                        
-                        if (!isNumber && !isAllowedKey) {
-                          e.preventDefault();
-                        }
-                      }}
-                      onPaste={(e) => {
-                        e.preventDefault();
-                        const pastedText = e.clipboardData.getData('text');
-                        const digits = pastedText.replace(/\D/g, '');
-                        const formatted = formatPhoneNumber(digits, selectedCountry);
-                        setFormData(prev => ({
-                          ...prev,
-                          parentPhone: formatted
-                        }));
-                      }}
-                      className="form-input"
-                      placeholder={selectedCountry.placeholder}
-                      disabled={isSubmitting}
-                      inputMode="numeric"
-                      maxLength={20}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="region" className="form-label">
-                      {t('modal.form.region')}
-                    </label>
-                    <select
-                      id="region"
-                      name="region"
-                      value={formData.region}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      required
-                      disabled={isSubmitting}
-                    >
-                      <option value="">{t('modal.form.regionPlaceholder')}</option>
-                      {regions.map((region) => (
-                        <option key={region} value={region}>
-                          {region}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="englishLevel" className="form-label">
-                      {t('modal.form.englishLevel')}
-                    </label>
-                    <select
-                      id="englishLevel"
-                      name="englishLevel"
-                      value={formData.englishLevel}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      required
-                      disabled={isSubmitting}
-                    >
-                      <option value="">{t('modal.form.englishLevelPlaceholder')}</option>
-                      {englishLevels.map((level) => (
-                        <option key={level} value={level}>
-                          {level}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label">
-                      {t('modal.form.certificate')}
-                    </label>
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                  {currentStep === 1 && (
+                    <>
+                      <div className="form-group">
+                        <label htmlFor="fullName" className="form-label">
+                          {t('modal.form.fullName')}
+                        </label>
                         <input
-                          type="radio"
-                          name="hasCertificate"
-                          value={t('modal.form.yes')}
-                          checked={formData.hasCertificate === t('modal.form.yes')}
+                          type="text"
+                          id="fullName"
+                          name="fullName"
+                          value={formData.fullName}
                           onChange={handleInputChange}
+                          className="form-input"
+                          placeholder={t('modal.form.fullNamePlaceholder')}
+                          required
                           disabled={isSubmitting}
-                          style={{ cursor: 'pointer' }}
                         />
-                        <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.yes')}</span>
-                      </label>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                        <input
-                          type="radio"
-                          name="hasCertificate"
-                          value={t('modal.form.no')}
-                          checked={formData.hasCertificate === t('modal.form.no')}
-                          onChange={handleInputChange}
-                          disabled={isSubmitting}
-                          style={{ cursor: 'pointer' }}
-                        />
-                        <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.no')}</span>
-                      </label>
-                    </div>
-                  </div>
+                      </div>
 
-                  <motion.button
-                    type="submit"
-                    className="submit-button"
-                    disabled={isSubmitting}
-                    whileHover={!isSubmitting ? { scale: 1.02 } : {}}
-                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                    style={{
-                      opacity: isSubmitting ? 0.7 : 1,
-                      cursor: isSubmitting ? 'not-allowed' : 'pointer'
-                    }}
-                  >
-                    {isSubmitting ? (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{
-                          width: '16px',
-                          height: '16px',
-                          border: '2px solid rgba(255,255,255,0.3)',
-                          borderTop: '2px solid white',
-                          borderRadius: '50%',
-                          animation: 'spin 0.6s linear infinite',
-                          display: 'inline-block'
-                        }}></span>
-                        {t('common.loading')}
-                      </span>
-                    ) : (
-                      t('common.submit')
-                    )}
-                  </motion.button>
+                      <div className="form-group">
+                        <label htmlFor="phone" className="form-label">
+                          {t('modal.form.phone')}
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          onKeyDown={(e) => {
+                            const allowedKeys = [
+                              'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 
+                              'ArrowUp', 'ArrowDown', 'Tab', 'Escape', 'Enter'
+                            ];
+                            const isNumber = /[0-9]/.test(e.key);
+                            const isAllowedKey = allowedKeys.includes(e.key);
+                            
+                            if (!isNumber && !isAllowedKey) {
+                              e.preventDefault();
+                            }
+                          }}
+                          onPaste={(e) => {
+                            e.preventDefault();
+                            const pastedText = e.clipboardData.getData('text');
+                            const digits = pastedText.replace(/\D/g, '');
+                            const formatted = formatPhoneNumber(digits, selectedCountry);
+                            setFormData(prev => ({
+                              ...prev,
+                              phone: formatted
+                            }));
+                          }}
+                          className="form-input"
+                          placeholder={selectedCountry.placeholder}
+                          required
+                          disabled={isSubmitting}
+                          inputMode="numeric"
+                          maxLength={20}
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {currentStep === 2 && (
+                    <>
+                      <div className="form-group">
+                        <label htmlFor="parentPhone" className="form-label">
+                          {t('modal.form.parentPhone')}
+                        </label>
+                        <input
+                          type="tel"
+                          id="parentPhone"
+                          name="parentPhone"
+                          value={formData.parentPhone}
+                          onChange={handleInputChange}
+                          onKeyDown={(e) => {
+                            const allowedKeys = [
+                              'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 
+                              'ArrowUp', 'ArrowDown', 'Tab', 'Escape', 'Enter'
+                            ];
+                            const isNumber = /[0-9]/.test(e.key);
+                            const isAllowedKey = allowedKeys.includes(e.key);
+                            
+                            if (!isNumber && !isAllowedKey) {
+                              e.preventDefault();
+                            }
+                          }}
+                          onPaste={(e) => {
+                            e.preventDefault();
+                            const pastedText = e.clipboardData.getData('text');
+                            const digits = pastedText.replace(/\D/g, '');
+                            const formatted = formatPhoneNumber(digits, selectedCountry);
+                            setFormData(prev => ({
+                              ...prev,
+                              parentPhone: formatted
+                            }));
+                          }}
+                          className="form-input"
+                          placeholder={selectedCountry.placeholder}
+                          disabled={isSubmitting}
+                          inputMode="numeric"
+                          maxLength={20}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="region" className="form-label">
+                          {t('modal.form.region')}
+                        </label>
+                        <select
+                          id="region"
+                          name="region"
+                          value={formData.region}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          required
+                          disabled={isSubmitting}
+                        >
+                          <option value="">{t('modal.form.regionPlaceholder')}</option>
+                          {regions.map((region) => (
+                            <option key={region} value={region}>
+                              {region}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="englishLevel" className="form-label">
+                          {t('modal.form.englishLevel')}
+                        </label>
+                        <select
+                          id="englishLevel"
+                          name="englishLevel"
+                          value={formData.englishLevel}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          required
+                          disabled={isSubmitting}
+                        >
+                          <option value="">{t('modal.form.englishLevelPlaceholder')}</option>
+                          {englishLevels.map((level) => (
+                            <option key={level} value={level}>
+                              {level}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label">
+                          {t('modal.form.certificate')}
+                        </label>
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                            <input
+                              type="radio"
+                              name="hasCertificate"
+                              value={t('modal.form.yes')}
+                              checked={formData.hasCertificate === t('modal.form.yes')}
+                              onChange={handleInputChange}
+                              disabled={isSubmitting}
+                              style={{ cursor: 'pointer' }}
+                            />
+                            <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.yes')}</span>
+                          </label>
+                          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                            <input
+                              type="radio"
+                              name="hasCertificate"
+                              value={t('modal.form.no')}
+                              checked={formData.hasCertificate === t('modal.form.no')}
+                              onChange={handleInputChange}
+                              disabled={isSubmitting}
+                              style={{ cursor: 'pointer' }}
+                            />
+                            <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.no')}</span>
+                          </label>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {currentStep === 1 ? (
+                    <motion.button
+                      type="button"
+                      className="submit-button"
+                      disabled={isSubmitting}
+                      onClick={handleNextStep}
+                      whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                      whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                      style={{
+                        opacity: isSubmitting ? 0.7 : 1,
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer'
+                      }}
+                    >
+                      {nextLabel}
+                    </motion.button>
+                  ) : (
+                    <motion.button
+                      type="submit"
+                      className="submit-button"
+                      disabled={isSubmitting}
+                      whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                      whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                      style={{
+                        opacity: isSubmitting ? 0.7 : 1,
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer'
+                      }}
+                    >
+                      {isSubmitting ? (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <span style={{
+                            width: '16px',
+                            height: '16px',
+                            border: '2px solid rgba(255,255,255,0.3)',
+                            borderTop: '2px solid white',
+                            borderRadius: '50%',
+                            animation: 'spin 0.6s linear infinite',
+                            display: 'inline-block'
+                          }}></span>
+                          {t('common.loading')}
+                        </span>
+                      ) : (
+                        t('common.submit')
+                      )}
+                    </motion.button>
+                  )}
                 </form>
+
+                <div className="modal-steps">
+                  <div className={`modal-step ${currentStep === 1 ? 'active' : ''}`}>
+                    <span className="modal-step-label">{stepLocationLabel}</span>
+                    <div className="modal-step-bar"></div>
+                  </div>
+                  <div className={`modal-step ${currentStep === 2 ? 'active' : ''}`}>
+                    <span className="modal-step-label">{stepCargoLabel}</span>
+                    <div className="modal-step-bar"></div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
