@@ -199,7 +199,7 @@ const Students = () => {
           <Swiper
             modules={[Autoplay, Pagination]}
             spaceBetween={20}
-            slidesPerView={2}
+            slidesPerView={1.5}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
@@ -211,23 +211,15 @@ const Students = () => {
             loop={true}
             breakpoints={{
               320: {
-                slidesPerView: 1,
+                slidesPerView: 1.5,
                 spaceBetween: 10,
               },
-              480: {
-                slidesPerView: 1.5,
-                spaceBetween: 15,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 15,
-              },
-              1024: {
-                slidesPerView: 2,
+              768: {
+                slidesPerView: 3,
                 spaceBetween: 20,
               },
               1280: {
-                slidesPerView: 2,
+                slidesPerView: 4,
                 spaceBetween: 20,
               },
             }}

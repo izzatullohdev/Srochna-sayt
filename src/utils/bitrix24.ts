@@ -34,6 +34,8 @@ interface Bitrix24DealData {
   UF_CRM_1769674491?: string;
   UF_CRM_1769674557?: string;
   UF_CRM_1769750196?: string;
+  UF_CRM_1769753758?: string;
+  UF_CRM_1769753709?: string;
 }
 
 interface Bitrix24ErrorResponse {
@@ -186,6 +188,8 @@ export const addDealToBitrix24 = async (
       ...(dealData.UF_CRM_1769674491 !== undefined ? { UF_CRM_1769674491: dealData.UF_CRM_1769674491 } : {}),
       ...(dealData.UF_CRM_1769674557 !== undefined ? { UF_CRM_1769674557: dealData.UF_CRM_1769674557 } : {}),
       ...(dealData.UF_CRM_1769750196 !== undefined ? { UF_CRM_1769750196: dealData.UF_CRM_1769750196 } : {}),
+      ...(dealData.UF_CRM_1769753758 !== undefined ? { UF_CRM_1769753758: dealData.UF_CRM_1769753758 } : {}),
+      ...(dealData.UF_CRM_1769753709 !== undefined ? { UF_CRM_1769753709: dealData.UF_CRM_1769753709 } : {}),
     };
 
     const requestBody = {

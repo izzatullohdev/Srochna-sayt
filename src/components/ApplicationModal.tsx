@@ -197,6 +197,8 @@ const ApplicationModal = () => {
         UF_CRM_1769674491: formData.region || '',
         UF_CRM_1769674557: formData.englishLevel || '',
         UF_CRM_1769750196: certificateValue,
+        UF_CRM_1769753758: cleanPhone || '',
+        UF_CRM_1769753709: formData.fullName || '',
       };
 
       const dealResponse = await addDealToBitrix24(dealData);
@@ -469,6 +471,7 @@ const ApplicationModal = () => {
                               checked={formData.hasCertificate === t('modal.form.yes')}
                               onChange={handleInputChange}
                               disabled={isSubmitting}
+                              className="form-radio"
                               style={{ cursor: 'pointer' }}
                             />
                             <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.yes')}</span>
@@ -481,6 +484,7 @@ const ApplicationModal = () => {
                               checked={formData.hasCertificate === t('modal.form.no')}
                               onChange={handleInputChange}
                               disabled={isSubmitting}
+                              className="form-radio"
                               style={{ cursor: 'pointer' }}
                             />
                             <span style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '1rem' }}>{t('modal.form.no')}</span>

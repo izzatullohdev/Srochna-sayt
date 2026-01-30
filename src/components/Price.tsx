@@ -7,6 +7,16 @@ import './Price.css';
 const Price = () => {
   const { openModal } = useModal();
   const { t } = useTranslation();
+  const planFeatures = [
+    t('price.plan.feature1'),
+    t('price.plan.feature2'),
+    t('price.plan.feature3'),
+    t('price.plan.feature4'),
+    t('price.plan.feature5'),
+    t('price.plan.feature6'),
+    t('price.plan.feature7')
+  ].filter((feature) => feature.trim().length > 0);
+
   const pricePlans = [
     {
       id: 1,
@@ -14,15 +24,7 @@ const Price = () => {
       price: t('price.plan.price'),
       currency: t('price.plan.currency'),
       description: t('price.plan.description'),
-      features: [
-        t('price.plan.feature1'),
-        t('price.plan.feature2'),
-        t('price.plan.feature3'),
-        t('price.plan.feature4'),
-        t('price.plan.feature5'),
-        t('price.plan.feature6'),
-        t('price.plan.feature7')
-      ],
+      features: planFeatures,
       buttonText: t('price.plan.button')
     }
   ];

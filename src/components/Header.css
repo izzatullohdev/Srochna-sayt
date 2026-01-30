@@ -619,7 +619,9 @@
 
 .submit-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(245, 124, 0, 0.45);
+  box-shadow: 0 8px 20px rgba(255, 255, 255,);
+  background: #f57c00;
+  color: #ffffff;
 }
 
 .submit-button:active {
@@ -629,6 +631,12 @@
 .submit-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.form-radio {
+  width: 16px;
+  height: 16px;
+  accent-color: #f57c00;
 }
 
 .modal-steps {

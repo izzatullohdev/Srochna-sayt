@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: 7fr 3fr;
   gap: 3rem;
-  align-items: center;
+  align-items: stretch;
 }
 
 .online-text {
@@ -87,6 +87,9 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   max-width: 100%;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .slider-header {
@@ -113,7 +116,9 @@
 
 .online-swiper {
   width: 100%;
-  height: 350px;
+  flex: 1;
+  height: auto;
+  min-height: 350px;
   border-radius: 12px;
   overflow: hidden;
   max-width: 100%;
@@ -240,6 +245,10 @@
 
   .online-swiper {
     height: 350px;
+  }
+
+  .online-slider-wrapper {
+    height: auto;
   }
 }
 
