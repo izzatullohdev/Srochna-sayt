@@ -60,6 +60,11 @@ export const I18nProvider = ({ children }: I18nProviderProps) => {
   // Get initial language from localStorage or default
   const getInitialLanguage = (): Language => {
     if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const queryLang = params.get('lang') as Language | null;
+      if (queryLang === 'uz' || queryLang === 'ru') {
+        return queryLang;
+      }
       const saved = localStorage.getItem(LANGUAGE_STORAGE_KEY) as Language;
       if (saved === 'uz' || saved === 'ru') {
         return saved;
@@ -81,8 +86,39 @@ export const I18nProvider = ({ children }: I18nProviderProps) => {
     setLanguageState(lang);
     if (typeof window !== 'undefined') {
       localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+      const params = new URLSearchParams(window.location.search);
+      params.set('lang', lang);
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
     }
   };
+
+  // Keep document lang and SEO meta in sync with language
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    document.documentElement.lang = language;
+
+    const title = t('header.hero.title');
+    const description = t('header.hero.description');
+
+    if (title && title !== 'header.hero.title') {
+      document.title = title;
+    }
+
+    const updateMeta = (selector: string, content: string) => {
+      const element = document.querySelector<HTMLMetaElement>(selector);
+      if (element && content && !content.includes('header.hero.')) {
+        element.content = content;
+      }
+    };
+
+    updateMeta('meta[name="description"]', description);
+    updateMeta('meta[property="og:title"]', title);
+    updateMeta('meta[property="og:description"]', description);
+    updateMeta('meta[name="twitter:title"]', title);
+    updateMeta('meta[name="twitter:description"]', description);
+  }, [language, translations]);
 
   // Translation function - supports nested keys with dot notation
   const t = (key: string): string => {
