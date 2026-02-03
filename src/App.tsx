@@ -13,7 +13,7 @@ import { ModalProvider } from './context/ModalContext'
 import { I18nProvider } from './i18n'
 import './App.css'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import ThankYou from './pages/ThankYou'
+import ThankYou from './pages/ThankYou.tsx'
 
 const HomePage = () => (
   <div className="app">

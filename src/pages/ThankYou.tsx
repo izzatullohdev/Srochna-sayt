@@ -8,11 +8,7 @@ const ThankYou = () => {
 
   useEffect(() => {
     document.title = t('thankYou.metaTitle')
-    const redirectTimer = window.setTimeout(() => {
-      window.location.href = 'https://t.me/unicum_foundation'
-    }, 2000)
-
-    return () => window.clearTimeout(redirectTimer)
+    
   }, [t])
 
   return (
@@ -25,12 +21,8 @@ const ThankYou = () => {
             <HiCheck />
           </div>
           <h1>{t('thankYou.title')}</h1>
-          <p>
-            {t('thankYou.subtitle')}
-          </p>
-          <p className="thank-you-subtitle">
-            {t('thankYou.telegramPrompt')}
-          </p>
+          <p>{t('thankYou.subtitle')}</p>
+          <p className="thank-you-subtitle">{t('thankYou.telegramPrompt')}</p>
 
           <div className="thank-you-actions">
             <div className="thank-you-action-card">
