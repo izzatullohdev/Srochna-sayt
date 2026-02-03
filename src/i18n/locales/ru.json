@@ -144,5 +144,12 @@
       "preIntermediate": "Pre-intermediate",
       "intermediate": "Intermediate"
     }
+  },
+  "thankYou": {
+    "metaTitle": "Заявка принята",
+    "title": "Спасибо, ваша заявка успешно принята!",
+    "subtitle": "Мы скоро свяжемся с вами.",
+    "telegramPrompt": "Чтобы быть в курсе всех новостей, подпишитесь на наш Telegram-канал.",
+    "cta": "Unicum Foundation"
   }
 }

@@ -144,5 +144,12 @@
       "preIntermediate": "Pre-intermediate",
       "intermediate": "Intermediate"
     }
+  },
+  "thankYou": {
+    "metaTitle": "Ariza qabul qilindi",
+    "title": "Rahmat, arizangiz muvaffaqiyatli qabul qilindi!",
+    "subtitle": "Tez orada siz bilan bog'lanamiz.",
+    "telegramPrompt": "Barcha yangiliklardan xabardor bo'lish uchun Telegram kanalimizga a'zo bo'ling.",
+    "cta": "Unicum Foundation"
   }
 }
