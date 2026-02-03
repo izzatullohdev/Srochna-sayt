@@ -114,9 +114,6 @@ const Header = () => {
             <li className="nav-item">
               <a href="#faq" onClick={(e) => handleSmoothScroll(e, 'faq')}>{t('header.nav.faq')}</a>
             </li>
-            <li className="nav-item">
-              <Link to="/thank-you">Thank-you</Link>
-            </li>
           </ul>
 
           <div className="navbar-right">
