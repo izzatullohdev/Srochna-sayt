@@ -33,7 +33,7 @@ const ThankYou = () => {
             <div className="thank-you-action-card">
               <a
                 className="thank-you-button"
-                href="https://unicum.uz/"
+                href="https://t.me/unicum_foundation"
                 target="_blank"
                 rel="noopener noreferrer"
               >
