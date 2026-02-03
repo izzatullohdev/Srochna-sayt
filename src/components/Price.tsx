@@ -193,10 +193,12 @@ const Price = () => {
                   <p className="price-card-description">{plan.description}</p>
                   <ul className="price-card-features">
                     {plan.features.map((feature, index) => (
-                      <li key={index}>
-                        <span className="feature-bullet">
-                          <HiFire />
-                        </span>
+                      <li key={index} className={index === 0 ? 'feature-title' : undefined}>
+                        {index !== 0 && (
+                          <span className="feature-bullet">
+                            <HiFire />
+                          </span>
+                        )}
                         {feature}
                       </li>
                     ))}
