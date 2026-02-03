@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { AdvancedVideo } from '@cloudinary/react';
 import { cld } from '../config/cloudinary';
@@ -112,6 +113,9 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <a href="#faq" onClick={(e) => handleSmoothScroll(e, 'faq')}>{t('header.nav.faq')}</a>
+            </li>
+            <li className="nav-item">
+              <Link to="/thank-you">Thank-you</Link>
             </li>
           </ul>
 
