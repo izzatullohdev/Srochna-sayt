@@ -9,11 +9,11 @@ const ThankYou = () => {
   useEffect(() => {
     document.title = t('thankYou.metaTitle')
 
-    // const redirectTimer = window.setTimeout(() => {
-    //   window.location.href = 'https://t.me/unicum_foundation'
-    // }, 5000)
+    const redirectTimer = window.setTimeout(() => {
+      window.location.href = 'https://t.me/unicum_foundation'
+    }, 5000)
 
-    // return () => window.clearTimeout(redirectTimer)
+    return () => window.clearTimeout(redirectTimer)
   }, [t])
 
   return (
