@@ -11,7 +11,7 @@ const ThankYou = () => {
 
     const redirectTimer = window.setTimeout(() => {
       window.location.href = 'https://t.me/unicum_foundation'
-    }, 2000)
+    }, 5000)
 
     return () => window.clearTimeout(redirectTimer)
   }, [t])
