@@ -234,7 +234,11 @@ const Price = () => {
                     onSubmit={handlePaymeSubmit}
                   >
                     <input type="hidden" name="merchant" value="6981d980a15c110cdb64dd86" />
-                    <input type="hidden" name="amount" value={paymeAmount} />
+                    <input
+                      type="hidden"
+                      name="amount"
+                      value={paymeAmount ? String(Number(paymeAmount) * 100) : ''}
+                    />
                     <input type="hidden" name="account[name]" value={paymeFullName} />
                     <input type="hidden" name="account[pini]" value={paymePini} />
                     <input type="hidden" name="account[contract]" value={paymeContract} />

@@ -16,6 +16,15 @@ const Payment = () => {
     document.title = t('payme.pageTitle')
   }, [t])
 
+  const amountOptions = [
+    { value: '150000', label: `To'lov summasi: 150 000 - 10%` },
+    { value: '1500000', label: `1 500 000 - 1 oylik` },
+    { value: '7200000', label: `7 200 000 - 6 oylik` }
+  ]
+
+  const selectedAmountLabel =
+    amountOptions.find((option) => option.value === paymeAmount)?.label ?? t('payme.amountPlaceholder')
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -37,7 +46,11 @@ const Payment = () => {
           onSubmit={handleSubmit}
         >
           <input type="hidden" name="merchant" value="6981d980a15c110cdb64dd86" />
-          <input type="hidden" name="amount" value={paymeAmount} />
+          <input
+            type="hidden"
+            name="amount"
+            value={paymeAmount ? String(Number(paymeAmount) * 100) : ''}
+          />
           <input type="hidden" name="account[name]" value={paymeFullName} />
           <input type="hidden" name="account[pini]" value={paymePini} />
           <input type="hidden" name="account[contract]" value={paymeContract} />
@@ -67,45 +80,22 @@ const Payment = () => {
               onClick={() => setIsAmountOpen((open) => !open)}
               aria-expanded={isAmountOpen}
             >
-              <span className="payme-select-label">
-                {paymeAmount
-                  ? paymeAmount === '150000'
-                    ? `To'lov summasi: 150 000 - 10%`
-                    : paymeAmount === '1500000'
-                      ? `1 500 000 - 1 oylik`
-                      : `7 200 000 - 6 oylik`
-                  : t('payme.amountPlaceholder')}
-              </span>
+              <span className="payme-select-label">{selectedAmountLabel}</span>
               <span className="payme-select-icon" aria-hidden="true">▾</span>
             </button>
             <div className={`payme-select-menu${isAmountOpen ? ' is-open' : ''}`}>
-              <button
-                type="button"
-                onClick={() => {
-                  setPaymeAmount('150000')
-                  setIsAmountOpen(false)
-                }}
-              >
-                {`To'lov summasi: 150 000 - 10%`}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setPaymeAmount('1500000')
-                  setIsAmountOpen(false)
-                }}
-              >
-                {`1 500 000 - 1 oylik`}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setPaymeAmount('7200000')
-                  setIsAmountOpen(false)
-                }}
-              >
-                {`7 200 000 - 6 oylik`}
-              </button>
+              {amountOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => {
+                    setPaymeAmount(option.value)
+                    setIsAmountOpen(false)
+                  }}
+                >
+                  {option.label}
+                </button>
+              ))}
             </div>
           </div>
 
