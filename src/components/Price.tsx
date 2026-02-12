@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { HiFire } from 'react-icons/hi';
 import { useTranslation } from '../i18n';
+import paymeLogo from '../assets/payme.png';
 import './Price.css';
-
 const Price = () => {
   const { t } = useTranslation();
+  const paymeFormRef = useRef<HTMLFormElement | null>(null);
+  const [isPaymeModalOpen, setIsPaymeModalOpen] = useState(false);
+  const [paymeFullName, setPaymeFullName] = useState('');
+  const [paymePini, setPaymePini] = useState('');
+  const [paymeContract, setPaymeContract] = useState('');
+  const [paymeAmount, setPaymeAmount] = useState('');
+  const [isAmountOpen, setIsAmountOpen] = useState(false);
   const planFeatures = [
     t('price.plan.feature1'),
     t('price.plan.feature2'),
@@ -54,6 +62,19 @@ const Price = () => {
       y: 0,
       transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as const }
     }
+  };
+
+  const handlePaymeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsPaymeModalOpen(true);
+  };
+
+  const handlePaymeConfirm = () => {
+    if (!paymeFullName.trim() || !paymePini.trim() || !paymeContract.trim() || !paymeAmount.trim()) {
+      return;
+    }
+    setIsPaymeModalOpen(false);
+    paymeFormRef.current?.submit();
   };
 
   return (
@@ -205,19 +226,113 @@ const Price = () => {
                   </ul>
                 </div>
                 <div className="price-card-footer">
-                  <motion.a
-                    href="https://b24-zouffe.bitrix24.site/crm_form_pfddk"
-                    className="price-button"
-                    whileTap={{ scale: 0.95 }}
+                  <form
+                    method="POST"
+                    action="https://checkout.paycom.uz"
+                    className="price-payme-form"
+                    ref={paymeFormRef}
+                    onSubmit={handlePaymeSubmit}
                   >
-                    {plan.buttonText}
-                  </motion.a>
+                    <input type="hidden" name="merchant" value="6981d980a15c110cdb64dd86" />
+                    <input type="hidden" name="amount" value={paymeAmount} />
+                    <input type="hidden" name="account[name]" value={paymeFullName} />
+                    <input type="hidden" name="account[pini]" value={paymePini} />
+                    <input type="hidden" name="account[contract]" value={paymeContract} />
+                    <button type="submit" className="price-button">
+                      To&apos;lov qilish uchun
+                    </button>
+                  </form>
                 </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </div>
+
+      {isPaymeModalOpen && (
+        <div className="payme-modal-overlay" onClick={() => setIsPaymeModalOpen(false)}>
+          <div
+            className={`payme-modal${isAmountOpen ? ' payme-modal--expanded' : ''}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img className="payme-modal-logo" src={paymeLogo} alt="Payme" />
+            <input
+              type="text"
+              placeholder={t('payme.fullNamePlaceholder')}
+              value={paymeFullName}
+              onChange={(event) => setPaymeFullName(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder={t('payme.pinflPlaceholder')}
+              value={paymePini}
+              onChange={(event) => setPaymePini(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder={t('payme.contractPlaceholder')}
+              value={paymeContract}
+              onChange={(event) => setPaymeContract(event.target.value)}
+            />
+            <div className="payme-select">
+              <button
+                type="button"
+                className="payme-select-trigger"
+                onClick={() => setIsAmountOpen((open) => !open)}
+                aria-expanded={isAmountOpen}
+              >
+                <span className="payme-select-label">
+                  {paymeAmount
+                    ? paymeAmount === '150000'
+                      ? `To'lov summasi: 150 000 - 10%`
+                      : paymeAmount === '1500000'
+                        ? `1 500 000 - 1 oylik`
+                        : `7 200 000 - 6 oylik`
+                    : t('payme.amountPlaceholder')}
+                </span>
+                <span className="payme-select-icon" aria-hidden="true">▾</span>
+              </button>
+              <div className={`payme-select-menu${isAmountOpen ? ' is-open' : ''}`}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPaymeAmount('150000');
+                    setIsAmountOpen(false);
+                  }}
+                >
+                  {`To'lov summasi: 150 000 - 10%`}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPaymeAmount('1500000');
+                    setIsAmountOpen(false);
+                  }}
+                >
+                  {`1 500 000 - 1 oylik`}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPaymeAmount('7200000');
+                    setIsAmountOpen(false);
+                  }}
+                >
+                  {`7 200 000 - 6 oylik`}
+                </button>
+              </div>
+            </div>
+            <div className="payme-modal-actions">
+              <button type="button" className="payme-cancel" onClick={() => setIsPaymeModalOpen(false)}>
+                {t('payme.cancel')}
+              </button>
+              <button type="button" className="payme-confirm" onClick={handlePaymeConfirm}>
+                {t('payme.confirm')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </motion.section>
   );

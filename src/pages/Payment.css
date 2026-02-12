@@ -1,0 +1,160 @@
+.payme-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f5f0e8;
+}
+
+.payme-page .payme-modal {
+  width: min(560px, 100%);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.payme-page .payme-modal h3 {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+}
+
+.payme-page .payme-modal-logo {
+  width: 160px;
+  height: 80px;
+  margin: 0 auto 16px;
+  display: block;
+  object-fit: cover;
+}
+
+.payme-page .payme-modal input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-size: 1rem;
+  outline: none;
+}
+
+.payme-page .payme-modal input + input {
+  margin-top: 10px;
+}
+
+.payme-page .payme-select {
+  position: relative;
+  margin-top: 10px;
+}
+
+.payme-page .payme-select-trigger {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.payme-page .payme-select-label {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+}
+
+.payme-page .payme-select-icon {
+  font-size: 0.8rem;
+  color: #6f6f6f;
+  transition: transform 0.2s ease;
+}
+
+.payme-page .payme-select-trigger[aria-expanded="true"] .payme-select-icon {
+  transform: rotate(180deg);
+}
+
+.payme-page .payme-select-menu {
+  position: static;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: max-height 0.9s ease, opacity 0.6s ease, transform 0.6s ease;
+}
+
+.payme-page .payme-select-menu.is-open {
+  max-height: 240px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  margin-top: 8px;
+}
+
+.payme-page .payme-select-menu button {
+  padding: 12px 14px;
+  border: none;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.payme-page .payme-select-menu button:hover {
+  background: #f5f5f5;
+}
+
+.payme-page .payme-modal input::placeholder {
+  color: #6f6f6f;
+}
+
+.payme-page .payme-modal input:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
+
+.payme-page .payme-modal-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.payme-page .payme-language {
+  flex: 0 0 20%;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.payme-page .payme-confirm {
+  flex: 0 0 80%;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #ff8c00;
+  color: #ffffff;
+}

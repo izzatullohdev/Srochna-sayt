@@ -256,31 +256,229 @@
 
 .price-button {
   width: 100%;
-  padding: 1rem 1.5rem;
+  height: 70px;
   background: #1a1a1a;
-  color: white;
-  border: none;
+  color: #ffffff;
   border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
 .price-button:hover {
-  background: #1a1a1a;
-  color: white;
   text-decoration: none;
   transform: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
+.price-button img,
+.price-button .payme-image {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.payme-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 3000;
+}
+
+.payme-modal {
+  width: min(560px, 100%);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: min-height 0.45s ease;
+}
+
+.payme-modal--expanded {
+  min-height: 520px;
+}
+
+.payme-modal h3 {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+}
+
+.payme-modal-logo {
+  width: 160px;
+  height: 80px;
+  margin: 0 auto 16px;
+  display: block;
+  object-fit: cover;
+}
+
+.payme-modal input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-size: 1rem;
+  outline: none;
+}
+
+.payme-modal select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-size: 1rem;
+  outline: none;
+  margin-top: 10px;
+}
+
+.payme-modal input::placeholder {
+  color: #6f6f6f;
+}
+
+.payme-modal input + input {
+  margin-top: 10px;
+}
+
+.payme-modal input:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
+
+.payme-modal select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
+
+.payme-select {
+  position: relative;
+  margin-top: 10px;
+}
+
+.payme-select-trigger {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.payme-select-label {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+}
+
+.payme-select-icon {
+  font-size: 0.8rem;
+  color: #6f6f6f;
+  transition: transform 0.2s ease;
+}
+
+.payme-select-trigger[aria-expanded="true"] .payme-select-icon {
+  transform: rotate(180deg);
+}
+
+.payme-select-menu {
+  position: static;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+
+.payme-select-menu.is-open {
+  max-height: 240px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  margin-top: 8px;
+}
+
+.payme-select-menu button {
+  padding: 12px 14px;
+  border: none;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.payme-select-menu button:hover {
+  background: #f5f5f5;
+}
+
+.payme-modal-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.payme-modal-actions button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.payme-cancel {
+  background: #f1f2f2;
+  color: #1a1a1a;
+}
+
+.payme-confirm {
+  background: #ff8c00;
+  color: #ffffff;
+}
+
+.payme-image{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
 .price-button:active {
   transform: translateY(0);
 }

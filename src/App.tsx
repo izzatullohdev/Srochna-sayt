@@ -14,6 +14,7 @@ import { I18nProvider } from './i18n'
 import './App.css'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import ThankYou from './pages/ThankYou.tsx'
+import Payment from './pages/Payment.tsx'
 
 const HomePage = () => (
   <div className="app">
@@ -54,6 +55,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/thank-you" element={<ThankYou />} />
+              <Route path="/payment" element={<Payment />} />
             </Routes>
           </BrowserRouter>
         </ModalProvider>

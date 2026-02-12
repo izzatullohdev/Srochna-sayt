@@ -1,6 +1,7 @@
 {
   "common": {
     "apply": "Подать заявку",
+    "pay": "Оплатить",
     "close": "Закрыть",
     "submit": "Отправить",
     "next": "Далее",
@@ -151,5 +152,15 @@
     "subtitle": "Мы скоро свяжемся с вами.",
     "telegramPrompt": "Чтобы быть в курсе всех новостей, подпишитесь на наш Telegram-канал.",
     "cta": "Unicum Foundation"
+  },
+  "payme": {
+    "pageTitle": "Оплата",
+    "modalTitle": "Для оплаты через Payme, пожалуйста, полностью укажите имя и фамилию",
+    "fullNamePlaceholder": "Имя и фамилия",
+    "pinflPlaceholder": "ПИНФЛ (JShShIR)",
+    "contractPlaceholder": "Номер договора",
+    "amountPlaceholder": "Выберите сумму оплаты",
+    "cancel": "Закрыть",
+    "confirm": "Продолжить"
   }
 }

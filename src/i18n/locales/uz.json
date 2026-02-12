@@ -1,6 +1,7 @@
 {
   "common": {
     "apply": "Ariza topshirish",
+    "pay": "To'lov qilish",
     "close": "Yopish",
     "submit": "Yuborish",
     "next": "Keyingi",
@@ -151,5 +152,15 @@
     "subtitle": "Tez orada siz bilan bog'lanamiz.",
     "telegramPrompt": "Barcha yangiliklardan xabardor bo'lish uchun Telegram kanalimizga a'zo bo'ling.",
     "cta": "Unicum Foundation"
+  },
+  "payme": {
+    "pageTitle": "To'lov",
+    "modalTitle": "Peyme orqalik to'lov qilish uchun iltimos Ism familiyangizni to'liq kirgazing",
+    "fullNamePlaceholder": "Ism va familiya",
+    "pinflPlaceholder": "PINFL (JShShIR)",
+    "contractPlaceholder": "Shartnoma raqami",
+    "amountPlaceholder": "To'lov summasini tanlang",
+    "cancel": "Yopish",
+    "confirm": "Davom etish"
   }
 }

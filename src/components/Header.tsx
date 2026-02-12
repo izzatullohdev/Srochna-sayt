@@ -156,17 +156,30 @@ const Header = () => {
           >
             {t('header.hero.description')}
           </motion.p>
-          <motion.a
-            href="https://b24-zouffe.bitrix24.site/crm_form_pfddk"
-            className="cta-button"
-            initial={{ y: 30, opacity: 0, scale: 0.9 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.3 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {t('common.apply')}
-          </motion.a>
+          <div className="hero-cta-row">
+            <motion.a
+              href="https://b24-zouffe.bitrix24.site/crm_form_pfddk"
+              className="cta-button"
+              initial={{ y: 30, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {t('common.apply')}
+            </motion.a>
+            <motion.a
+              href="/payment"
+              className="cta-button payment-button"
+              initial={{ y: 30, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.35 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {t('common.pay')}
+            </motion.a>
+          </div>
         </motion.div>
       </motion.div>
 
