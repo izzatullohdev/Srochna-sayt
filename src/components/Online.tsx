@@ -4,26 +4,19 @@ import { Scrollbar, Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import { useTranslation } from '../i18n';
 import './Online.css';
+import onlineImage1 from '../assets/2-rasm.png';
+import onlineImage2 from '../assets/2-r.png';
 
 const Online = () => {
   const { t } = useTranslation();
-  // Cloudinary cloud name
-  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
-  
-  // Cloudinary rasmlarini to'g'ridan-to'g'ri URL formatida yaratish
-  const image1 = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_400,c_fill,q_auto,f_auto/ojxcjb`;
-  const image2 = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_400,c_fill,q_auto,f_auto/2-r_dd9mlt`;
-
-
-
   const slides = [
     {
       id: 1,
-      image: image1,
+      image: onlineImage1,
     },
     {
       id: 2,
-      image: image2,
+      image: onlineImage2,
     },
   ];
 

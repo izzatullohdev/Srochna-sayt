@@ -8,7 +8,6 @@ import Price from './components/Price'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
 import ApplicationModal from './components/ApplicationModal'
-import { CloudinaryProvider } from './context/CloudinaryProvider'
 import { ModalProvider } from './context/ModalContext'
 import { I18nProvider } from './i18n'
 import './App.css'
@@ -48,18 +47,16 @@ const RedirectHandler = () => {
 function App() {
   return (
     <I18nProvider>
-      <CloudinaryProvider>
-        <ModalProvider>
-          <BrowserRouter>
-            <RedirectHandler />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/thank-you" element={<ThankYou />} />
-              <Route path="/payment" element={<Payment />} />
-            </Routes>
-          </BrowserRouter>
-        </ModalProvider>
-      </CloudinaryProvider>
+      <ModalProvider>
+        <BrowserRouter>
+          <RedirectHandler />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/payment" element={<Payment />} />
+          </Routes>
+        </BrowserRouter>
+      </ModalProvider>
     </I18nProvider>
   )
 }

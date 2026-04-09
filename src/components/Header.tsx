@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
-import { AdvancedVideo } from '@cloudinary/react';
-import { cld } from '../config/cloudinary';
 import { useTranslation } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 import './Header.css';
 import logoImage from '../assets/logo.png';
+import backgroundVideo from '../assets/gf.mp4';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,21 +45,17 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Cloudinary video yaratish
-  // 'sample' o'rniga Cloudinary'dagi video public ID ni kiriting
-  // Masalan: 'videos/hero-background' yoki 'background-video'
-  const backgroundVideo = cld.video('gf_zgqpgq');
-
   return (
     <header className="header">
       {/* Background Video */}
       <div className="header-video-wrapper">
-        <AdvancedVideo
-          cldVid={backgroundVideo}
+        <video
+          src={backgroundVideo}
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           className="header-background-video"
         />
       </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '../i18n';
 import './About.css';
+import thumbnailImage from '../assets/Sequence 01.00_55_18_01.Still003.bmp';
 
 const About = () => {
   const { t } = useTranslation();
@@ -61,18 +62,10 @@ const About = () => {
     return url;
   };
 
-  // Cloudinary rasm URL'ini yaratish
-  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
-  const publicId = 't5wp4w';
-  
-  // Cloudinary URL yaratish (to'g'ridan-to'g'ri format)
-  const cloudinaryImageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/w_600,h_800,c_fill,q_auto,f_auto/${publicId}`;
-  
-
   const aboutItems = [
     {
       id: 1,
-      image: cloudinaryImageUrl, // Cloudinary'dan rasm
+      image: thumbnailImage,
       videoUrl: 'https://www.youtube.com/shorts/tHm6ve1tffs', // YouTube shorts URL
       name: 'Alimbekova Zulhumor',
       position: "Psixologiya yo'nalishi talabasi",

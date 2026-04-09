@@ -6,6 +6,14 @@ import 'swiper/swiper-bundle.css';
 import { useTranslation } from '../i18n';
 import './Students.css';
 
+import unicom13 from '../assets/Unicom 1-13.jpg';
+import unicom8 from '../assets/Unicom 1-8.jpg';
+import unicom7 from '../assets/Unicom 1-7.jpg';
+import unicom6 from '../assets/Unicom 1-6.jpg';
+import unicom5 from '../assets/Unicom 1-5.jpg';
+import unicom4 from '../assets/Unicom 1-4.jpg';
+import unicom3 from '../assets/Unicom 1-3.jpg';
+
 const Students = () => {
   const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -64,60 +72,90 @@ const Students = () => {
     return url;
   };
 
-
-  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dutup06en';
-  const getCloudinaryImage = (publicId: string) =>
-    `https://res.cloudinary.com/${cloudName}/image/upload/w_400,h_600,c_fill,q_auto,f_auto/${publicId}`;
-
   const testimonials = [
     {
       id: 1,
       name: 'Boborajabova Nozanin',
       specialization: "Xorijiy til va adabiyot yo'nalishi talabasi",
-      image: getCloudinaryImage('hgj1if'),
+      image: unicom6,
       videoUrl: 'https://youtube.com/shorts/ZsMRk3n-_6g',
     },
     {
       id: 2,
       name: 'Jalilov Abdulbosit',
       specialization: "Xorijiy til va adabiyot yo'nalishi talabasi",
-      image: getCloudinaryImage('Unicom_1-3_ptwpd2'),
+      image: unicom3,
       videoUrl: 'https://youtube.com/shorts/BnQxNp49sEY',
     },
     {
       id: 3,
       name: 'Saydaliyeva Mubina',
       specialization: "Turizm va mehmondo'stlik yo'nalishi talabasi",
-      image: getCloudinaryImage('Unicom_1-5_eyrtoj'),
+      image: unicom5,
       videoUrl: 'https://youtube.com/shorts/bDBGtCOeUMQ',
     },
     {
       id: 4,
       name: 'Soatova Hilola',
       specialization: "Iqtisodiyot yo'nalishi talabasi",
-      image: getCloudinaryImage('Unicom_1-8_d9rvkb'),
+      image: unicom8,
       videoUrl: 'https://youtube.com/shorts/3qzpAiJoOSo',
     },
     {
       id: 5,
       name: '',
       specialization: '',
-      image: getCloudinaryImage('Unicom_1-7_yplgrq'),
+      image: unicom7,
       videoUrl: 'https://youtube.com/shorts/F241rIoGxLY',
     },
     {
       id: 6,
       name: '',
       specialization: '',
-      image: getCloudinaryImage('Unicom_1-4_v6tqvk'),
+      image: unicom4,
       videoUrl: 'https://youtube.com/shorts/dY-Li9hB-2c',
     },
     {
       id: 7,
       name: '',
       specialization: '',
-      image: getCloudinaryImage('Unicom_1-13_wdaulk'),
+      image: unicom13,
       videoUrl: 'https://youtube.com/shorts/C2zcv09L6b8',
+    },
+    {
+      id: 8,
+      name: '',
+      specialization: '',
+      image: unicom6,
+      videoUrl: 'https://youtube.com/shorts/ZsMRk3n-_6g',
+    },
+    {
+      id: 9,
+      name: '',
+      specialization: '',
+      image: unicom3,
+      videoUrl: 'https://youtube.com/shorts/BnQxNp49sEY',
+    },
+    {
+      id: 10,
+      name: '',
+      specialization: '',
+      image: unicom5,
+      videoUrl: 'https://youtube.com/shorts/bDBGtCOeUMQ',
+    },
+    {
+      id: 11,
+      name: '',
+      specialization: '',
+      image: unicom8,
+      videoUrl: 'https://youtube.com/shorts/3qzpAiJoOSo',
+    },
+    {
+      id: 12,
+      name: '',
+      specialization: '',
+      image: unicom7,
+      videoUrl: 'https://youtube.com/shorts/F241rIoGxLY',
     },
   ];
 
