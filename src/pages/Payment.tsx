@@ -6,6 +6,7 @@ import './Payment.css'
 const Payment = () => {
   const { language, setLanguage, t } = useTranslation()
   const paymeFormRef = useRef<HTMLFormElement | null>(null)
+  const contractInputRef = useRef<HTMLInputElement | null>(null)
   const [paymeFullName, setPaymeFullName] = useState('')
   const [paymePini, setPaymePini] = useState('')
   const [paymeContract, setPaymeContract] = useState('')
@@ -52,7 +53,7 @@ const Payment = () => {
             value={paymeAmount ? String(Number(paymeAmount) * 100) : ''}
           />
           <input type="hidden" name="account[name]" value={paymeFullName} />
-          <input type="hidden" name="account[pini]" value={paymePini} />
+          <input type="hidden" name="account[pinfl]" value={paymePini} />
           <input type="hidden" name="account[contract]" value={paymeContract} />
 
           <input
@@ -65,13 +66,23 @@ const Payment = () => {
             type="text"
             placeholder={t('payme.pinflPlaceholder')}
             value={paymePini}
-            onChange={(event) => setPaymePini(event.target.value)}
+            onChange={(event) => {
+              const onlyDigits = event.target.value.replace(/\D/g, '').slice(0, 14)
+              setPaymePini(onlyDigits)
+
+              if (onlyDigits.length === 14) {
+                contractInputRef.current?.focus()
+              }
+            }}
+            inputMode="numeric"
+            maxLength={14}
           />
           <input
             type="text"
             placeholder={t('payme.contractPlaceholder')}
             value={paymeContract}
             onChange={(event) => setPaymeContract(event.target.value)}
+            ref={contractInputRef}
           />
           <div className="payme-select">
             <button

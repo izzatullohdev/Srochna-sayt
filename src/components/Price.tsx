@@ -240,7 +240,7 @@ const Price = () => {
                       value={paymeAmount ? String(Number(paymeAmount) * 100) : ''}
                     />
                     <input type="hidden" name="account[name]" value={paymeFullName} />
-                    <input type="hidden" name="account[pini]" value={paymePini} />
+                    <input type="hidden" name="account[pinfl]" value={paymePini} />
                     <input type="hidden" name="account[contract]" value={paymeContract} />
                     <button type="submit" className="price-button">
                       To&apos;lov qilish uchun
