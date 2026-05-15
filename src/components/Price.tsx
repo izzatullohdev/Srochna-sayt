@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { HiFire } from 'react-icons/hi';
 import { useTranslation } from '../i18n';
+import { cleanPhoneNumber, countries, formatPhoneNumber } from '../utils/phoneUtils';
 import paymeLogo from '../assets/payme.png';
 import './Price.css';
 const Price = () => {
@@ -11,8 +12,10 @@ const Price = () => {
   const [paymeFullName, setPaymeFullName] = useState('');
   const [paymePini, setPaymePini] = useState('');
   const [paymeContract, setPaymeContract] = useState('');
+  const [paymePhone, setPaymePhone] = useState('');
   const [paymeAmount, setPaymeAmount] = useState('');
   const [isAmountOpen, setIsAmountOpen] = useState(false);
+  const uzbekistan = countries.find((country) => country.code === 'UZ') ?? countries[0];
   const planFeatures = [
     t('price.plan.feature1'),
     t('price.plan.feature2'),
@@ -69,8 +72,30 @@ const Price = () => {
     setIsPaymeModalOpen(true);
   };
 
+  const formatUzbekPhone = (value: string) => {
+    let digits = value.replace(/\D/g, '');
+    if (digits.startsWith('998')) {
+      digits = digits.slice(3);
+    }
+    return formatPhoneNumber(digits.slice(0, 9), uzbekistan);
+  };
+
+  const isUzbekPhoneComplete = (value: string) => {
+    let digits = value.replace(/\D/g, '');
+    if (digits.startsWith('998')) {
+      digits = digits.slice(3);
+    }
+    return digits.length === 9;
+  };
+
   const handlePaymeConfirm = () => {
-    if (!paymeFullName.trim() || !paymePini.trim() || !paymeContract.trim() || !paymeAmount.trim()) {
+    if (
+      !paymeFullName.trim() ||
+      !paymePini.trim() ||
+      !paymeContract.trim() ||
+      !isUzbekPhoneComplete(paymePhone) ||
+      !paymeAmount.trim()
+    ) {
       return;
     }
     setIsPaymeModalOpen(false);
@@ -240,8 +265,9 @@ const Price = () => {
                       value={paymeAmount ? String(Number(paymeAmount) * 100) : ''}
                     />
                     <input type="hidden" name="account[name]" value={paymeFullName} />
-                    <input type="hidden" name="account[pinfl]" value={paymePini} />
+                    <input type="hidden" name="account[pini]" value={paymePini} />
                     <input type="hidden" name="account[contract]" value={paymeContract} />
+                    <input type="hidden" name="account[phone_number]" value={cleanPhoneNumber(paymePhone, uzbekistan).replace(/\D/g, '')} />
                     <button type="submit" className="price-button">
                       To&apos;lov qilish uchun
                     </button>
@@ -277,6 +303,19 @@ const Price = () => {
               placeholder={t('payme.contractPlaceholder')}
               value={paymeContract}
               onChange={(event) => setPaymeContract(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder={t('payme.phonePlaceholder')}
+              value={paymePhone}
+              onFocus={() => {
+                if (!paymePhone) {
+                  setPaymePhone(uzbekistan.phoneCode);
+                }
+              }}
+              onChange={(event) => setPaymePhone(formatUzbekPhone(event.target.value))}
+              inputMode="numeric"
+              maxLength={19}
             />
             <div className="payme-select">
               <button

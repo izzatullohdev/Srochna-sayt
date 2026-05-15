@@ -159,6 +159,7 @@
     "fullNamePlaceholder": "Имя и фамилия",
     "pinflPlaceholder": "ПИНФЛ (JShShIR)",
     "contractPlaceholder": "Номер договора",
+    "phonePlaceholder": "Номер телефона",
     "amountPlaceholder": "Выберите сумму оплаты",
     "cancel": "Закрыть",
     "confirm": "Продолжить"

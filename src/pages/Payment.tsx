@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from '../i18n'
+import { cleanPhoneNumber, countries, formatPhoneNumber } from '../utils/phoneUtils'
 import paymeLogo from '../assets/payme.png'
 import './Payment.css'
 
@@ -10,8 +11,10 @@ const Payment = () => {
   const [paymeFullName, setPaymeFullName] = useState('')
   const [paymePini, setPaymePini] = useState('')
   const [paymeContract, setPaymeContract] = useState('')
+  const [paymePhone, setPaymePhone] = useState('')
   const [paymeAmount, setPaymeAmount] = useState('')
   const [isAmountOpen, setIsAmountOpen] = useState(false)
+  const uzbekistan = countries.find((country) => country.code === 'UZ') ?? countries[0]
 
   useEffect(() => {
     document.title = t('payme.pageTitle')
@@ -26,10 +29,32 @@ const Payment = () => {
   const selectedAmountLabel =
     amountOptions.find((option) => option.value === paymeAmount)?.label ?? t('payme.amountPlaceholder')
 
+  const formatUzbekPhone = (value: string) => {
+    let digits = value.replace(/\D/g, '')
+    if (digits.startsWith('998')) {
+      digits = digits.slice(3)
+    }
+    return formatPhoneNumber(digits.slice(0, 9), uzbekistan)
+  }
+
+  const isUzbekPhoneComplete = (value: string) => {
+    let digits = value.replace(/\D/g, '')
+    if (digits.startsWith('998')) {
+      digits = digits.slice(3)
+    }
+    return digits.length === 9
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!paymeFullName.trim() || !paymePini.trim() || !paymeContract.trim() || !paymeAmount.trim()) {
+    if (
+      !paymeFullName.trim() ||
+      !paymePini.trim() ||
+      !paymeContract.trim() ||
+      !isUzbekPhoneComplete(paymePhone) ||
+      !paymeAmount.trim()
+    ) {
       return
     }
 
@@ -53,8 +78,9 @@ const Payment = () => {
             value={paymeAmount ? String(Number(paymeAmount) * 100) : ''}
           />
           <input type="hidden" name="account[name]" value={paymeFullName} />
-          <input type="hidden" name="account[pinfl]" value={paymePini} />
+          <input type="hidden" name="account[pini]" value={paymePini} />
           <input type="hidden" name="account[contract]" value={paymeContract} />
+          <input type="hidden" name="account[phone_number]" value={cleanPhoneNumber(paymePhone, uzbekistan).replace(/\D/g, '')} />
 
           <input
             type="text"
@@ -83,6 +109,19 @@ const Payment = () => {
             value={paymeContract}
             onChange={(event) => setPaymeContract(event.target.value)}
             ref={contractInputRef}
+          />
+          <input
+            type="text"
+            placeholder={t('payme.phonePlaceholder')}
+            value={paymePhone}
+            onFocus={() => {
+              if (!paymePhone) {
+                setPaymePhone(uzbekistan.phoneCode)
+              }
+            }}
+            onChange={(event) => setPaymePhone(formatUzbekPhone(event.target.value))}
+            inputMode="numeric"
+            maxLength={19}
           />
           <div className="payme-select">
             <button
